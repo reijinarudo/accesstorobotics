@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Finley Robotics Initiative</title>
+<meta name="description" content="Reach the Finley Robotics Initiative for application questions, partnership inquiries, donor conversations, or general correspondence.">
+<meta name="theme-color" content="#F2EDE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><span>Finley Robotics</span><span class="brand-mark">A2R</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu"><span></span></button>
+    <ul id="primary-nav" class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mission.html">Mission</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="reachy.html">Reachy Mini</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="donors.html">Donors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="container">
+      <span class="kicker kicker--accent">Contact</span>
+      <h1>Reach the Initiative.</h1>
+      <p class="deck">Use the form below for applicant questions, partnership inquiries, donor conversations, mentorship interest, or general correspondence. We typically respond within five business days.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+
+      <aside class="sidebar">
+        <span class="kicker kicker--accent">Direct correspondence</span>
+        <dl class="hero-aside" style="margin-top:1rem;border-left:1px solid var(--rule);padding-left:1.5rem">
+          <dt>General</dt>
+          <dd><a href="mailto:info@accesstorobotics.org">info@accesstorobotics.org</a></dd>
+          <dt>Applications</dt>
+          <dd>Use the <a href="scholarship.html">Google Form</a> beginning September 1, 2026</dd>
+          <dt>Press</dt>
+          <dd><a href="mailto:press@accesstorobotics.org">press@accesstorobotics.org</a></dd>
+          <dt>Location</dt>
+          <dd>Atlanta, GA, United States</dd>
+        </dl>
+
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule)">
+          <p class="form-note" style="line-height:1.6">
+            Applicants: please do not submit applications through the contact form. Use the dedicated Google Form linked on the <a href="scholarship.html" class="tlink" style="font-size:0.78rem">Scholarship page</a>.
+          </p>
+        </div>
+      </aside>
+
+      <div class="reveal">
+        <!--
+          FORM SETUP INSTRUCTIONS
+          ------------------------------------------------------------
+          This form uses Formspree (https://formspree.io). Free tier
+          allows 50 submissions/month, more than enough for this site.
+
+          1. Create a free Formspree account.
+          2. Create a new form, point its destination to your email.
+          3. Replace the form action URL below with your endpoint:
+                action="https://formspree.io/f/YOUR-FORM-ID"
+          4. Verify your email when Formspree sends confirmation.
+
+          ALTERNATIVE (Netlify Forms): If hosting on Netlify, replace
+          the form tag with: <form name="contact" method="POST" data-netlify="true">
+          and add a hidden field: <input type="hidden" name="form-name" value="contact">
+          Netlify Forms requires no Formspree account.
+        -->
+        <form class="form" action="https://formspree.io/f/REPLACE-WITH-FORM-ID" method="POST">
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="role">Reason for contact</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>Select one</option>
+              <option>General inquiry</option>
+              <option>Donor conversation</option>
+              <option>Partnership / institutional</option>
+              <option>Mentorship volunteer</option>
+              <option>Press / media</option>
+              <option>Question about applying (parent or counselor)</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <!-- Honeypot for basic spam protection -->
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <label>Leave blank: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div>
+            <button class="btn btn--accent" type="submit">
+              Send message <span class="arrow">→</span>
+            </button>
+          </div>
+
+          <p class="form-note">
+            By submitting, you consent to receive a reply from the Initiative at the email provided. We do not add contact-form submitters to any mailing list.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Finley Robotics Initiative</h4>
+        <p>A program dedicated to expanding access to robotics and artificial intelligence for underserved high school students.</p>
+      </div>
+      <div class="footer-col"><h5>The Program</h5><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mission.html">Mission</a></li>
+        <li><a href="scholarship.html">Scholarship</a></li>
+        <li><a href="reachy.html">Reachy Mini</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Get Involved</h5><ul>
+        <li><a href="scholarship.html">Apply</a></li>
+        <li><a href="donors.html">Donate</a></li>
+        <li><a href="contact.html">Partner with us</a></li>
+        <li><a href="showcase.html">Showcase</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base">
+      <span>© <span data-year>2026</span> Finley Robotics Initiative. All rights reserved.</span>
+      <span>Atlanta, GA · accesstorobotics.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

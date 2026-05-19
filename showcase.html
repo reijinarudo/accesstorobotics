@@ -1,40 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Showcase | Finley Robotics Initiative</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Showcase — Finley Robotics Initiative</title>
+<meta name="description" content="A documented record of scholar projects, available after the first cohort completes its program year.">
+<meta name="theme-color" content="#F2EDE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">Finley Robotics</div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="scholarship.html">Scholarship</a></li>
-        <li><a href="reachy.html">Reachy Mini</a></li>
-        <li><a href="showcase.html" class="active">Showcase</a></li>
-        <li><a href="donors.html">Donors</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section class="section">
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><span>Finley Robotics</span><span class="brand-mark">A2R</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu"><span></span></button>
+    <ul id="primary-nav" class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mission.html">Mission</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="reachy.html">Reachy Mini</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="donors.html">Donors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
     <div class="container">
-      <h2>Student & Community Showcase</h2>
-      <p>This gallery features scenes of students, educators and Reachy Mini robots. As our program grows, scholars will share their own projects and creations here.</p>
-      <div class="gallery">
-        <img src="assets/images/gen1.png" alt="Students with Reachy Mini in a classroom">
-        <img src="assets/images/gen2.png" alt="Group interacting with Reachy Mini">
-        <img src="assets/images/reachy.png" alt="Reachy Mini on table">
-      </div>
+      <span class="kicker kicker--accent">Scholar Showcase</span>
+      <h1>The record of the work, as it is produced.</h1>
+      <p class="deck">Each scholar publishes project documentation here during the program year. The Showcase serves as a portfolio for the scholar and as the program's transparent record of outcomes.</p>
     </div>
   </section>
-  <footer>
-    <p>&copy; 2026 Finley Robotics Initiative. All rights reserved.</p>
-    <p><a href="privacy.html" style="color:#fff; text-decoration:underline;">Privacy Policy</a> | <a href="terms.html" style="color:#fff; text-decoration:underline;">Terms of Use</a></p>
-  </footer>
+
+  <section class="section">
+    <div class="container">
+
+      <div style="border:1px solid var(--rule);padding:clamp(2rem,5vw,4rem);background:rgba(255,255,255,0.35);text-align:center;max-width:48rem;margin-inline:auto">
+        <span class="kicker kicker--accent">Status</span>
+        <h2 style="font-size:var(--step-4);margin-top:1rem;font-weight:400">Awaiting the inaugural cohort.</h2>
+        <p style="margin-top:1rem;max-width:none;color:var(--ink-2)">
+          The first scholar projects will be published here beginning Spring 2027, after the 2026–2027 cohort receives their hardware and starts work. Until then, this page is intentionally blank.
+        </p>
+        <p style="margin-top:1.5rem">
+          <a class="tlink" href="scholarship.html">Read about applying <span class="arrow">→</span></a>
+        </p>
+      </div>
+
+      <div style="margin-top:4rem">
+        <span class="kicker kicker--accent">What will appear here</span>
+        <h3 style="margin-top:1rem;font-size:var(--step-3);font-weight:450">The format of a published project.</h3>
+        <p style="margin-top:1rem;max-width:60ch;color:var(--ink-2)">
+          Each project entry will include: the scholar's name (or initials, by family preference), a written description of the problem they chose, the approach they took, the code or design files they produced, what worked, what did not, and where they ended the program year. Photographs and short video clips will be included when available.
+        </p>
+        <p style="max-width:60ch;color:var(--ink-2);margin-top:1em">
+          We will not retouch project outcomes. A scholar who attempted a hard problem and did not finish it will be documented honestly. That documentation is more useful to the scholar's future, and to subsequent cohorts, than a sanitized version would be.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Finley Robotics Initiative</h4>
+        <p>A program dedicated to expanding access to robotics and artificial intelligence for underserved high school students.</p>
+      </div>
+      <div class="footer-col"><h5>The Program</h5><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mission.html">Mission</a></li>
+        <li><a href="scholarship.html">Scholarship</a></li>
+        <li><a href="reachy.html">Reachy Mini</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Get Involved</h5><ul>
+        <li><a href="scholarship.html">Apply</a></li>
+        <li><a href="donors.html">Donate</a></li>
+        <li><a href="contact.html">Partner with us</a></li>
+        <li><a href="showcase.html">Showcase</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base">
+      <span>© <span data-year>2026</span> Finley Robotics Initiative. All rights reserved.</span>
+      <span>Atlanta, GA · accesstorobotics.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

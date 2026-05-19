@@ -1,61 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reachy Mini | Finley Robotics Initiative</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reachy Mini — Finley Robotics Initiative</title>
+<meta name="description" content="Why we chose the Reachy Mini from Pollen Robotics as the platform for the Finley Robotics Scholarship.">
+<meta name="theme-color" content="#F2EDE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">Finley Robotics</div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="scholarship.html">Scholarship</a></li>
-        <li><a href="reachy.html" class="active">Reachy Mini</a></li>
-        <li><a href="showcase.html">Showcase</a></li>
-        <li><a href="donors.html">Donors</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section class="section">
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><span>Finley Robotics</span><span class="brand-mark">A2R</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu"><span></span></button>
+    <ul id="primary-nav" class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mission.html">Mission</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="reachy.html">Reachy Mini</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="donors.html">Donors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
     <div class="container">
-      <h2>Meet Reachy Mini</h2>
-      <div class="two-column">
-        <div>
-          <img src="assets/images/reachy.png" alt="Reachy Mini robot">
-        </div>
-        <div>
-          <p><strong>Reachy Mini</strong> is an expressive companion robot designed for human‑robot interaction, creative coding and AI exploration. Developed by Pollen Robotics and now maintained by Hugging Face, Reachy Mini combines approachable hardware with a fully open‑source software stack. Its compact design and friendly personality make it ideal for students and hobbyists.</p>
-          <h3>Key Features</h3>
-          <ul>
-            <li><strong>Open‑source platform:</strong> All hardware designs and software libraries are openly available, encouraging modification and community contributions.</li>
-            <li><strong>Expressive motion:</strong> Nine degrees of freedom enable head rotations, translations and antenna movements for lifelike gestures.</li>
-            <li><strong>Sensory suite:</strong> A high‑resolution camera, four digital microphones and a 5 W speaker allow vision, sound and speech interaction.</li>
-            <li><strong>On‑board compute:</strong> Powered by a Raspberry Pi Compute Module 4 with Wi‑Fi and Bluetooth for standalone operation or tethered control.</li>
-            <li><strong>Battery powered:</strong> The included LiFePO<sub>4</sub> battery provides portable use with built‑in protection circuitry.</li>
-            <li><strong>Python SDK:</strong> A simple Python library exposes control of motors, sensors and behaviors, making it accessible to beginners.</li>
-          </ul>
-          <h3>Specifications at a Glance</h3>
-          <ul>
-            <li><strong>Dimensions:</strong> 30 cm tall, 20 cm long and 15.5 cm wide; weighs about 1.5 kg.</li>
-            <li><strong>Degrees of Freedom:</strong> 9 DoF (6 in the head, 1 in the body and 2 in the antennae).</li>
-            <li><strong>Sensors:</strong> Raspberry Pi v3 wide‑angle camera and four PDM MEMS microphones.</li>
-            <li><strong>Actuators:</strong> Dynamixel motors controlling the base, antennae and Stewart platform.</li>
-            <li><strong>Power:</strong> 6.8 – 7.6 V LiFePO<sub>4</sub> battery (2000 mAh).</li>
-            <li><strong>Price:</strong> About $449 (subject to change).</li>
-          </ul>
-          <p>For more technical details, visit the official <a href="https://huggingface.co/reachy-mini" target="_blank" rel="noopener noreferrer">Reachy Mini page on Hugging Face</a>. The Finley Robotics Initiative uses Reachy Mini because its open design encourages learning and experimentation.</p>
-        </div>
+      <span class="kicker kicker--accent">The Hardware</span>
+      <h1>Reachy Mini, by Pollen Robotics.</h1>
+      <p class="deck">An open-source, expressive robot built for AI experimentation. Compact enough for a desk, capable enough for a real project, transparent enough for a student to actually learn from.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <aside class="sidebar reveal">
+        <figure class="frame">
+          <img src="assets/images/reachy-mini.jpg" alt="Reachy Mini robot" onerror="this.style.display='none'">
+          <figcaption>Reachy Mini · Pollen Robotics, 2024</figcaption>
+        </figure>
+        <dl class="hero-aside" style="margin-top:2rem;border-left:1px solid var(--rule);padding-left:1.5rem">
+          <dt>Manufacturer</dt><dd>Pollen Robotics (Hugging Face)</dd>
+          <dt>Degrees of freedom</dt><dd>9</dd>
+          <dt>Compute</dt><dd>Raspberry Pi 5</dd>
+          <dt>Sensors</dt><dd>Wide-angle camera, microphone array</dd>
+          <dt>Output</dt><dd>Animated head, speaker</dd>
+          <dt>Licensing</dt><dd>Open source, hardware and software</dd>
+        </dl>
+      </aside>
+
+      <div class="prose reveal">
+        <h2>Why this hardware</h2>
+        <p>
+          The Reachy Mini is not the cheapest robot a program could send a student. It is the platform we selected because of what it lets a student actually do. Three reasons in particular:
+        </p>
+        <ul>
+          <li><strong>It is a real platform, not a kit.</strong> Programs come and go, but the Reachy Mini comes from a research lab that builds the larger Reachy humanoid used in academic robotics. The same languages, the same libraries, the same modes of thinking carry forward.</li>
+          <li><strong>It is open source.</strong> A scholar can read the code. Can modify it. Can fix something themselves and contribute the fix back. This is the working model of real engineering, not a sealed black box that exists to be obeyed.</li>
+          <li><strong>It is expressive.</strong> Nine degrees of freedom and an animated head mean the robot can do social, perceptual, and motion-based projects in ways that a wheeled chassis cannot. Students gravitate toward problems they can see the robot reacting to.</li>
+        </ul>
+
+        <h2>What a scholar can build</h2>
+        <p>
+          The Reachy Mini's hardware envelope is large enough that the limit is the scholar's imagination, not the platform. Example projects scholars might attempt:
+        </p>
+        <ul>
+          <li>A vision pipeline that recognizes the scholar's family members and greets them differently.</li>
+          <li>A spoken-dialogue agent built on a small local language model.</li>
+          <li>An accessibility assistant that reads on-screen text aloud and responds to voice commands.</li>
+          <li>A musical performance piece using head motion synchronized to audio.</li>
+          <li>A research replication: reproducing a published robotics or HRI paper at the Mini's scale.</li>
+        </ul>
+
+        <h2 id="parents">For parents and counselors</h2>
+        <p>
+          We expect parents and school counselors to evaluate the program before students apply. A few specifics worth knowing:
+        </p>
+        <ul>
+          <li><strong>The robot has a camera and microphone.</strong> The student controls when these are active. The Initiative does not receive or store any audio or video from any scholar's robot. There is no remote management.</li>
+          <li><strong>The robot connects to the internet only when the student configures it to.</strong> Standalone operation is fully supported.</li>
+          <li><strong>Mentorship sessions are conducted in groups, by video call, with adults present.</strong> One-on-one contact between an individual mentor and an individual scholar is by request of the family only and is opt-in.</li>
+          <li><strong>The hardware is the scholar's property.</strong> Once shipped, it does not return to us.</li>
+        </ul>
+
+        <p style="margin-top:2rem">
+          <a class="tlink" href="scholarship.html">Read the scholarship details <span class="arrow">→</span></a>
+        </p>
       </div>
     </div>
   </section>
-  <footer>
-    <p>&copy; 2026 Finley Robotics Initiative. All rights reserved.</p>
-    <p><a href="privacy.html" style="color:#fff; text-decoration:underline;">Privacy Policy</a> | <a href="terms.html" style="color:#fff; text-decoration:underline;">Terms of Use</a></p>
-  </footer>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Finley Robotics Initiative</h4>
+        <p>A program dedicated to expanding access to robotics and artificial intelligence for underserved high school students.</p>
+      </div>
+      <div class="footer-col"><h5>The Program</h5><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mission.html">Mission</a></li>
+        <li><a href="scholarship.html">Scholarship</a></li>
+        <li><a href="reachy.html">Reachy Mini</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Get Involved</h5><ul>
+        <li><a href="scholarship.html">Apply</a></li>
+        <li><a href="donors.html">Donate</a></li>
+        <li><a href="contact.html">Partner with us</a></li>
+        <li><a href="showcase.html">Showcase</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base">
+      <span>© <span data-year>2026</span> Finley Robotics Initiative. All rights reserved.</span>
+      <span>Atlanta, GA · accesstorobotics.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
