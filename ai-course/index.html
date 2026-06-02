@@ -5,7 +5,408 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI-Epistemic Resilience &mdash; A Course for Professionals</title>
 <meta name="description" content="A self-paced course on thinking clearly, verifying information, and using AI responsibly. For educators, healthcare and legal professionals, and anyone responsible for AI use.">
-<link rel="stylesheet" href="assets/css/course.css">
+<style>
+/* ============================================================
+   AI-Epistemic Resilience Course
+   Scoped stylesheet for the /ai-course/ subfolder.
+   Designed to layer over accesstorobotics.org without
+   colliding with the site's existing assets/css/style.css.
+   All rules are namespaced under .aier-* to avoid bleed.
+   ============================================================ */
+
+:root {
+  --aier-ink: #14181d;
+  --aier-paper: #f7f5f0;
+  --aier-paper-raised: #fffefb;
+  --aier-line: #d8d3c7;
+  --aier-accent: #1f5c4d;        /* deep teal-green, reads as "verify/trust" */
+  --aier-accent-soft: #e3ede9;
+  --aier-amber: #b5761f;          /* used for inline author-action flags */
+  --aier-amber-soft: #f6ecd9;
+  --aier-muted: #5d6168;
+  --aier-maxw: 760px;
+}
+
+.aier-body {
+  margin: 0;
+  background: var(--aier-paper);
+  color: var(--aier-ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- shell ---- */
+.aier-wrap {
+  max-width: var(--aier-maxw);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+/* ---- top course bar ---- */
+.aier-bar {
+  border-bottom: 1px solid var(--aier-line);
+  background: var(--aier-paper-raised);
+}
+.aier-bar-inner {
+  max-width: var(--aier-maxw);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.aier-bar-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--aier-accent);
+  margin: 0;
+  text-decoration: none;
+}
+.aier-bar-org {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--aier-muted);
+  text-decoration: none;
+}
+.aier-bar-org:hover { color: var(--aier-accent); }
+
+/* ---- progress dots ---- */
+.aier-progress {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 1.5rem 0 0;
+  flex-wrap: wrap;
+}
+.aier-progress a {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--aier-line);
+  background: var(--aier-paper-raised);
+  color: var(--aier-muted);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.aier-progress a:hover { border-color: var(--aier-accent); color: var(--aier-accent); }
+.aier-progress a.is-current {
+  background: var(--aier-accent);
+  border-color: var(--aier-accent);
+  color: #fff;
+}
+
+/* ---- headings ---- */
+.aier-eyebrow {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--aier-accent);
+  font-weight: 700;
+  margin: 2rem 0 0.4rem;
+}
+.aier-h1 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  margin: 0 0 1.2rem;
+  letter-spacing: -0.01em;
+}
+.aier-h2 {
+  font-size: 1.4rem;
+  margin: 2.4rem 0 0.6rem;
+  padding-top: 0.4rem;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 90px; /* fixed-header anchor offset */
+}
+.aier-lead {
+  font-size: 1.18rem;
+  color: var(--aier-muted);
+  font-style: italic;
+  margin: 0 0 2rem;
+}
+
+/* ---- objectives box ---- */
+.aier-objectives {
+  background: var(--aier-accent-soft);
+  border-left: 3px solid var(--aier-accent);
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0 2rem;
+  border-radius: 0 6px 6px 0;
+}
+.aier-objectives h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  color: var(--aier-accent);
+}
+.aier-objectives ul { margin: 0; padding-left: 1.1rem; }
+.aier-objectives li { margin: 0.4rem 0; }
+
+/* ---- the four regulatory elements callout ---- */
+.aier-elements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin: 1.5rem 0 2rem;
+}
+.aier-element {
+  background: var(--aier-paper-raised);
+  border: 1px solid var(--aier-line);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+}
+.aier-element strong {
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  color: var(--aier-accent);
+  margin-bottom: 0.25rem;
+}
+.aier-element span { font-size: 0.95rem; color: var(--aier-muted); }
+@media (max-width: 560px) {
+  .aier-elements { grid-template-columns: 1fr; }
+}
+
+/* ---- author-action flag: shows YOU what to fill in. Print-hidden. ---- */
+.aier-flag {
+  background: var(--aier-amber-soft);
+  border: 1px dashed var(--aier-amber);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--aier-amber);
+  line-height: 1.5;
+}
+.aier-flag::before {
+  content: "AUTHOR NOTE — remove before publishing";
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+
+/* ---- reflective activity block ---- */
+.aier-activity {
+  background: var(--aier-paper-raised);
+  border: 1px solid var(--aier-line);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+  margin: 2rem 0;
+}
+.aier-activity h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+}
+.aier-activity .aier-activity-kind {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aier-muted);
+}
+.aier-activity ol { padding-left: 1.2rem; }
+.aier-activity li { margin: 0.5rem 0; }
+.aier-activity .aier-tag {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  color: var(--aier-accent);
+  font-weight: 600;
+}
+
+/* ---- figure ---- */
+.aier-figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+.aier-figure img { max-width: 100%; height: auto; border-radius: 8px; }
+.aier-figure figcaption {
+  font-size: 0.85rem;
+  color: var(--aier-muted);
+  margin-top: 0.7rem;
+  font-style: italic;
+}
+.aier-figure-placeholder {
+  border: 1px dashed var(--aier-line);
+  border-radius: 8px;
+  padding: 2.5rem 1rem;
+  color: var(--aier-muted);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+/* ---- references ---- */
+.aier-refs {
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--aier-line);
+  font-size: 0.92rem;
+  color: var(--aier-muted);
+}
+.aier-refs h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aier-ink);
+}
+
+/* ---- nav buttons ---- */
+.aier-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--aier-line);
+}
+.aier-btn {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.7rem 1.3rem;
+  border-radius: 6px;
+  border: 1px solid var(--aier-accent);
+  color: var(--aier-accent);
+  background: transparent;
+  transition: all 0.15s ease;
+}
+.aier-btn:hover { background: var(--aier-accent); color: #fff; }
+.aier-btn-primary { background: var(--aier-accent); color: #fff; }
+.aier-btn-primary:hover { background: #16463b; }
+.aier-btn-ghost { border-color: var(--aier-line); color: var(--aier-muted); }
+.aier-btn-ghost:hover { background: var(--aier-line); color: var(--aier-ink); }
+.aier-btn[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
+
+/* ---- landing-specific ---- */
+.aier-hero {
+  padding: 3rem 0 1rem;
+}
+.aier-hero .aier-h1 { font-size: 2.6rem; }
+
+/* ---- scroll cue (landing only) ---- */
+.aier-scrollcue {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: var(--aier-accent);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--aier-paper-raised);
+  border: 1px solid var(--aier-line);
+  border-radius: 999px;
+  padding: 0.5rem 1rem 0.4rem;
+  box-shadow: 0 4px 14px rgba(20, 24, 29, 0.12);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.aier-scrollcue:hover {
+  color: #fff;
+  background: var(--aier-accent);
+  border-color: var(--aier-accent);
+}
+.aier-scrollcue-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+  animation: aier-bob 1.8s ease-in-out infinite;
+}
+.aier-scrollcue.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px);
+  pointer-events: none;
+}
+@keyframes aier-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aier-scrollcue-arrow { animation: none; }
+}
+.aier-audience {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 2.5rem;
+}
+.aier-audience span {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  background: var(--aier-accent-soft);
+  color: var(--aier-accent);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+.aier-toc { list-style: none; padding: 0; margin: 2rem 0; }
+.aier-toc li {
+  border: 1px solid var(--aier-line);
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  background: var(--aier-paper-raised);
+  transition: border-color 0.15s ease;
+}
+.aier-toc li:hover { border-color: var(--aier-accent); }
+.aier-toc a {
+  display: block;
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  color: var(--aier-ink);
+}
+.aier-toc .aier-toc-num {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  color: var(--aier-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.aier-toc .aier-toc-title { font-size: 1.1rem; display: block; margin-top: 0.15rem; }
+.aier-toc .aier-toc-desc { font-size: 0.9rem; color: var(--aier-muted); display: block; margin-top: 0.2rem; }
+
+.aier-attribution {
+  font-size: 0.88rem;
+  color: var(--aier-muted);
+  background: var(--aier-paper-raised);
+  border: 1px solid var(--aier-line);
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+  line-height: 1.6;
+}
+
+/* ---- print: clean certificate-adjacent printing, hide author flags ---- */
+@media print {
+  .aier-flag, .aier-bar, .aier-nav, .aier-progress { display: none !important; }
+  .aier-body { background: #fff; }
+}
+
+</style>
 </head>
 <body class="aier-body">
 
@@ -35,6 +436,8 @@
       <span>Anyone responsible for AI use at work</span>
     </div>
   </section>
+
+  <span id="aier-more"></span>
 
   <h2 class="aier-h2">What you will learn</h2>
   <p>The course is built on a single framework: four interdependent <strong>regulatory elements</strong> that work together as a dynamic system rather than a checklist. You will learn to recognize them, practice them, and apply them across education, professional, and civic settings.</p>
@@ -75,5 +478,24 @@
   </div>
 
 </main>
+
+<a class="aier-scrollcue" id="aierScrollCue" href="#aier-more" aria-label="Scroll down for more">
+  <span class="aier-scrollcue-text">More below</span>
+  <span class="aier-scrollcue-arrow" aria-hidden="true">&#8595;</span>
+</a>
+<script>
+  (function () {
+    var cue = document.getElementById('aierScrollCue');
+    if (!cue) return;
+    function onScroll() {
+      if (window.scrollY > 40) {
+        cue.classList.add('is-hidden');
+      } else {
+        cue.classList.remove('is-hidden');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
 </body>
 </html>
