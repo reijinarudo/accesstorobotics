@@ -4,7 +4,400 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 5 &mdash; Applying AI-ER in Industry</title>
-<link rel="stylesheet" href="assets/css/course.css">
+<style>
+/* ============================================================
+   AI-Epistemic Resilience Course
+   Retuned to match accesstorobotics.org ("Editorial Engineering").
+   Palette, fonts, and buttons pulled from the main site's style.css.
+   Namespaced .aier-* to avoid collisions.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --aier-paper:      #F2EDE4;
+  --aier-paper-2:    #EBE5D9;
+  --aier-paper-dim:  #E4DDCC;
+  --aier-ink:        #18202E;
+  --aier-ink-2:      #2B3445;
+  --aier-mute:       #6B6358;
+  --aier-rule:       #C8BFAE;
+  --aier-accent:     #B85A28;
+  --aier-accent-deep:#8F4520;
+  --aier-highlight:  #E8DDC9;
+
+  --aier-ff-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --aier-ff-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --aier-ff-mono:    "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+
+  --aier-maxw: 760px;
+}
+
+.aier-body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 800px at 90% -10%, rgba(184,90,40,0.06), transparent 60%),
+    radial-gradient(1000px 700px at -10% 110%, rgba(24,32,46,0.05), transparent 55%),
+    var(--aier-paper);
+  background-attachment: fixed;
+  color: var(--aier-ink);
+  font-family: var(--aier-ff-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- shell ---- */
+.aier-wrap {
+  max-width: var(--aier-maxw);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- top course bar ---- */
+.aier-bar {
+  border-bottom: 1px solid var(--aier-rule);
+  background: var(--aier-paper);
+}
+.aier-bar-inner {
+  max-width: var(--aier-maxw);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.aier-bar-title {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--aier-ink);
+  margin: 0;
+  text-decoration: none;
+}
+.aier-bar-title:hover { color: var(--aier-accent); }
+.aier-bar-org {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--aier-mute);
+  text-decoration: none;
+}
+.aier-bar-org:hover { color: var(--aier-accent); }
+
+/* ---- progress dots ---- */
+.aier-progress {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 1.5rem 0 0;
+  flex-wrap: wrap;
+}
+.aier-progress a {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--aier-rule);
+  background: var(--aier-paper);
+  color: var(--aier-mute);
+  font-family: var(--aier-ff-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+.aier-progress a:hover { border-color: var(--aier-accent); color: var(--aier-accent); }
+.aier-progress a.is-current {
+  background: var(--aier-ink);
+  border-color: var(--aier-ink);
+  color: var(--aier-paper);
+}
+
+/* ---- headings ---- */
+.aier-eyebrow {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aier-accent);
+  font-weight: 500;
+  margin: 2rem 0 0.5rem;
+}
+.aier-h1 {
+  font-family: var(--aier-ff-display);
+  font-weight: 420;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(2rem, 1.6rem + 1.8vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.2rem;
+  color: var(--aier-ink);
+}
+.aier-h2 {
+  font-family: var(--aier-ff-display);
+  font-weight: 450;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(1.4rem, 1.2rem + 0.7vw, 1.7rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 2.4rem 0 0.6rem;
+  padding-top: 0.4rem;
+  color: var(--aier-ink);
+  scroll-margin-top: 90px;
+}
+.aier-lead {
+  font-family: var(--aier-ff-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--aier-ink-2);
+  font-style: italic;
+  line-height: 1.3;
+  margin: 0 0 2rem;
+}
+
+/* ---- objectives box ---- */
+.aier-objectives {
+  background: var(--aier-paper-2);
+  border-left: 3px solid var(--aier-accent);
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0 2rem;
+  border-radius: 0 4px 4px 0;
+}
+.aier-objectives h3 {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  color: var(--aier-accent);
+  font-weight: 500;
+}
+.aier-objectives ul { margin: 0; padding-left: 1.1rem; }
+.aier-objectives li { margin: 0.4rem 0; }
+
+/* ---- elements grid ---- */
+.aier-elements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin: 1.5rem 0 2rem;
+}
+.aier-element {
+  background: var(--aier-paper);
+  border: 1px solid var(--aier-rule);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+}
+.aier-element strong {
+  display: block;
+  font-family: var(--aier-ff-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--aier-accent);
+  margin-bottom: 0.25rem;
+}
+.aier-element span { font-size: 0.95rem; color: var(--aier-mute); }
+@media (max-width: 560px) {
+  .aier-elements { grid-template-columns: 1fr; }
+}
+
+/* ---- author-action flag ---- */
+.aier-flag {
+  background: var(--aier-highlight);
+  border: 1px dashed var(--aier-accent);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  color: var(--aier-accent-deep);
+  line-height: 1.5;
+}
+.aier-flag::before {
+  content: "AUTHOR NOTE — remove before publishing";
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  opacity: 0.85;
+}
+.aier-flag code {
+  font-family: var(--aier-ff-mono);
+  background: var(--aier-paper);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
+
+/* ---- activity block ---- */
+.aier-activity {
+  background: var(--aier-paper);
+  border: 1px solid var(--aier-rule);
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+  margin: 2rem 0;
+}
+.aier-activity h3 {
+  font-family: var(--aier-ff-display);
+  font-weight: 450;
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: var(--aier-ink);
+}
+.aier-activity .aier-activity-kind {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aier-mute);
+}
+.aier-activity ol { padding-left: 1.2rem; }
+.aier-activity li { margin: 0.5rem 0; }
+.aier-activity .aier-tag {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.72rem;
+  color: var(--aier-accent);
+  font-weight: 500;
+}
+
+/* ---- figure ---- */
+.aier-figure { margin: 2rem 0; text-align: center; }
+.aier-figure img { max-width: 100%; height: auto; border-radius: 6px; margin: 0 auto; }
+.aier-figure figcaption {
+  font-family: var(--aier-ff-body);
+  font-size: 0.85rem;
+  color: var(--aier-mute);
+  margin-top: 0.7rem;
+  font-style: italic;
+}
+.aier-figure-placeholder {
+  border: 1px dashed var(--aier-rule);
+  border-radius: 6px;
+  padding: 2.5rem 1rem;
+  color: var(--aier-mute);
+  font-family: var(--aier-ff-mono);
+  font-size: 0.9rem;
+}
+
+/* ---- references ---- */
+.aier-refs {
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--aier-rule);
+  font-size: 0.92rem;
+  color: var(--aier-mute);
+}
+.aier-refs h3 {
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aier-ink);
+  font-weight: 500;
+}
+
+/* ---- nav buttons (match site .btn) ---- */
+.aier-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--aier-rule);
+}
+.aier-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.95rem 1.4rem;
+  border: 1px solid var(--aier-ink);
+  background: var(--aier-ink);
+  color: var(--aier-paper);
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+.aier-btn:hover { background: var(--aier-accent); border-color: var(--aier-accent); color: var(--aier-paper); transform: translateY(-1px); }
+.aier-btn-primary { background: var(--aier-accent); border-color: var(--aier-accent); color: var(--aier-paper); }
+.aier-btn-primary:hover { background: var(--aier-accent-deep); border-color: var(--aier-accent-deep); }
+.aier-btn-ghost { background: transparent; color: var(--aier-ink); }
+.aier-btn-ghost:hover { background: var(--aier-ink); color: var(--aier-paper); border-color: var(--aier-ink); }
+.aier-btn[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
+
+/* ---- landing-specific ---- */
+.aier-hero { padding: 3rem 0 1rem; }
+.aier-hero .aier-h1 { font-size: clamp(2.2rem, 1.7rem + 2.2vw, 3.2rem); }
+
+.aier-hero-split { display: flex; align-items: center; gap: 2rem; }
+.aier-hero-text { flex: 1 1 0; min-width: 0; }
+.aier-hero-art { flex: 0 0 28%; max-width: 240px; }
+.aier-hero-art img { width: 100%; height: auto; display: block; }
+@media (max-width: 640px) {
+  .aier-hero-split { flex-direction: column-reverse; gap: 1rem; }
+  .aier-hero-art { flex-basis: auto; max-width: 200px; margin: 0 auto; }
+}
+
+/* scroll cue */
+.aier-scrollcue {
+  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 50;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  text-decoration: none; color: var(--aier-accent);
+  font-family: var(--aier-ff-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--aier-paper); border: 1px solid var(--aier-rule); border-radius: 999px;
+  padding: 0.5rem 1rem 0.4rem; box-shadow: 0 4px 14px rgba(24,32,46,0.12);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.aier-scrollcue:hover { color: var(--aier-paper); background: var(--aier-accent); border-color: var(--aier-accent); }
+.aier-scrollcue-arrow { font-size: 1.15rem; line-height: 1; animation: aier-bob 1.8s ease-in-out infinite; }
+.aier-scrollcue.is-hidden { opacity: 0; transform: translateX(-50%) translateY(12px); pointer-events: none; }
+@keyframes aier-bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
+@media (prefers-reduced-motion: reduce) { .aier-scrollcue-arrow { animation: none; } }
+
+.aier-audience { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 2.5rem; }
+.aier-audience span {
+  font-family: var(--aier-ff-mono); font-size: 0.78rem;
+  background: var(--aier-paper-2); color: var(--aier-ink-2);
+  padding: 0.4rem 0.8rem; border-radius: 999px; border: 1px solid var(--aier-rule);
+}
+
+.aier-toc { list-style: none; padding: 0; margin: 2rem 0; }
+.aier-toc li {
+  border: 1px solid var(--aier-rule); border-radius: 6px; margin-bottom: 0.7rem;
+  background: var(--aier-paper); transition: border-color 0.18s ease;
+}
+.aier-toc li:hover { border-color: var(--aier-accent); }
+.aier-toc a { display: block; padding: 1rem 1.2rem; text-decoration: none; color: var(--aier-ink); }
+.aier-toc .aier-toc-num { font-family: var(--aier-ff-mono); font-size: 0.74rem; color: var(--aier-accent); font-weight: 500; letter-spacing: 0.05em; }
+.aier-toc .aier-toc-title { font-family: var(--aier-ff-display); font-size: 1.15rem; display: block; margin-top: 0.15rem; }
+.aier-toc .aier-toc-desc { font-size: 0.9rem; color: var(--aier-mute); display: block; margin-top: 0.2rem; }
+
+.aier-attribution {
+  font-size: 0.9rem; color: var(--aier-mute);
+  background: var(--aier-paper-2); border: 1px solid var(--aier-rule);
+  border-radius: 6px; padding: 1.1rem 1.3rem; margin: 2rem 0; line-height: 1.6;
+}
+
+@media print {
+  .aier-flag, .aier-bar, .aier-nav, .aier-progress, .aier-scrollcue { display: none !important; }
+  .aier-body { background: var(--aier-paper); }
+}
+
+</style>
 </head>
 <body class="aier-body">
 
