@@ -788,3 +788,16 @@ em { font-style: italic; }
 :target {
   scroll-margin-top: 6rem;
 }
+/* AI-ER course CTA layout */
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+.cta-art { display: flex; align-items: center; justify-content: center; }
+.cta-art img { max-width: 200px; width: 100%; height: auto; }
+@media (max-width: 720px) {
+  .cta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cta-art { justify-content: flex-start; }
+}
