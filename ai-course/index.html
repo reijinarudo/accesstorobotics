@@ -8,33 +8,45 @@
 <style>
 /* ============================================================
    AI-Epistemic Resilience Course
-   Scoped stylesheet for the /ai-course/ subfolder.
-   Designed to layer over accesstorobotics.org without
-   colliding with the site's existing assets/css/style.css.
-   All rules are namespaced under .aier-* to avoid bleed.
+   Retuned to match accesstorobotics.org ("Editorial Engineering").
+   Palette, fonts, and buttons pulled from the main site's style.css.
+   Namespaced .aier-* to avoid collisions.
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  --aier-ink: #14181d;
-  --aier-paper: #f7f5f0;
-  --aier-paper-raised: #fffefb;
-  --aier-line: #d8d3c7;
-  --aier-accent: #1f5c4d;        /* deep teal-green, reads as "verify/trust" */
-  --aier-accent-soft: #e3ede9;
-  --aier-amber: #b5761f;          /* used for inline author-action flags */
-  --aier-amber-soft: #f6ecd9;
-  --aier-muted: #5d6168;
+  --aier-paper:      #F2EDE4;
+  --aier-paper-2:    #EBE5D9;
+  --aier-paper-dim:  #E4DDCC;
+  --aier-ink:        #18202E;
+  --aier-ink-2:      #2B3445;
+  --aier-mute:       #6B6358;
+  --aier-rule:       #C8BFAE;
+  --aier-accent:     #B85A28;
+  --aier-accent-deep:#8F4520;
+  --aier-highlight:  #E8DDC9;
+
+  --aier-ff-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --aier-ff-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --aier-ff-mono:    "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+
   --aier-maxw: 760px;
 }
 
 .aier-body {
   margin: 0;
-  background: var(--aier-paper);
+  background:
+    radial-gradient(1200px 800px at 90% -10%, rgba(184,90,40,0.06), transparent 60%),
+    radial-gradient(1000px 700px at -10% 110%, rgba(24,32,46,0.05), transparent 55%),
+    var(--aier-paper);
+  background-attachment: fixed;
   color: var(--aier-ink);
-  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-family: var(--aier-ff-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ---- shell ---- */
@@ -42,12 +54,14 @@
   max-width: var(--aier-maxw);
   margin: 0 auto;
   padding: 2.5rem 1.5rem 5rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---- top course bar ---- */
 .aier-bar {
-  border-bottom: 1px solid var(--aier-line);
-  background: var(--aier-paper-raised);
+  border-bottom: 1px solid var(--aier-rule);
+  background: var(--aier-paper);
 }
 .aier-bar-inner {
   max-width: var(--aier-maxw);
@@ -60,20 +74,22 @@
   flex-wrap: wrap;
 }
 .aier-bar-title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-weight: 700;
-  color: var(--aier-accent);
+  font-weight: 500;
+  color: var(--aier-ink);
   margin: 0;
   text-decoration: none;
 }
+.aier-bar-title:hover { color: var(--aier-accent); }
 .aier-bar-org {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: var(--aier-muted);
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--aier-mute);
   text-decoration: none;
 }
 .aier-bar-org:hover { color: var(--aier-accent); }
@@ -87,77 +103,90 @@
   flex-wrap: wrap;
 }
 .aier-progress a {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 1px solid var(--aier-line);
-  background: var(--aier-paper-raised);
-  color: var(--aier-muted);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid var(--aier-rule);
+  background: var(--aier-paper);
+  color: var(--aier-mute);
+  font-family: var(--aier-ff-mono);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
 }
 .aier-progress a:hover { border-color: var(--aier-accent); color: var(--aier-accent); }
 .aier-progress a.is-current {
-  background: var(--aier-accent);
-  border-color: var(--aier-accent);
-  color: #fff;
+  background: var(--aier-ink);
+  border-color: var(--aier-ink);
+  color: var(--aier-paper);
 }
 
 /* ---- headings ---- */
 .aier-eyebrow {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--aier-accent);
-  font-weight: 700;
-  margin: 2rem 0 0.4rem;
+  font-weight: 500;
+  margin: 2rem 0 0.5rem;
 }
 .aier-h1 {
-  font-size: 2.1rem;
-  line-height: 1.2;
+  font-family: var(--aier-ff-display);
+  font-weight: 420;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(2rem, 1.6rem + 1.8vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   margin: 0 0 1.2rem;
-  letter-spacing: -0.01em;
+  color: var(--aier-ink);
 }
 .aier-h2 {
-  font-size: 1.4rem;
+  font-family: var(--aier-ff-display);
+  font-weight: 450;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(1.4rem, 1.2rem + 0.7vw, 1.7rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   margin: 2.4rem 0 0.6rem;
   padding-top: 0.4rem;
-  letter-spacing: -0.01em;
-  scroll-margin-top: 90px; /* fixed-header anchor offset */
+  color: var(--aier-ink);
+  scroll-margin-top: 90px;
 }
 .aier-lead {
-  font-size: 1.18rem;
-  color: var(--aier-muted);
+  font-family: var(--aier-ff-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--aier-ink-2);
   font-style: italic;
+  line-height: 1.3;
   margin: 0 0 2rem;
 }
 
 /* ---- objectives box ---- */
 .aier-objectives {
-  background: var(--aier-accent-soft);
+  background: var(--aier-paper-2);
   border-left: 3px solid var(--aier-accent);
   padding: 1.2rem 1.4rem;
   margin: 1.5rem 0 2rem;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 4px 4px 0;
 }
 .aier-objectives h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   margin: 0 0 0.6rem;
   color: var(--aier-accent);
+  font-weight: 500;
 }
 .aier-objectives ul { margin: 0; padding-left: 1.1rem; }
 .aier-objectives li { margin: 0.4rem 0; }
 
-/* ---- the four regulatory elements callout ---- */
+/* ---- elements grid ---- */
 .aier-elements {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -165,92 +194,101 @@
   margin: 1.5rem 0 2rem;
 }
 .aier-element {
-  background: var(--aier-paper-raised);
-  border: 1px solid var(--aier-line);
-  border-radius: 8px;
+  background: var(--aier-paper);
+  border: 1px solid var(--aier-rule);
+  border-radius: 6px;
   padding: 1rem 1.1rem;
 }
 .aier-element strong {
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.9rem;
+  font-family: var(--aier-ff-body);
+  font-weight: 600;
+  font-size: 0.95rem;
   color: var(--aier-accent);
   margin-bottom: 0.25rem;
 }
-.aier-element span { font-size: 0.95rem; color: var(--aier-muted); }
+.aier-element span { font-size: 0.95rem; color: var(--aier-mute); }
 @media (max-width: 560px) {
   .aier-elements { grid-template-columns: 1fr; }
 }
 
-/* ---- author-action flag: shows YOU what to fill in. Print-hidden. ---- */
+/* ---- author-action flag ---- */
 .aier-flag {
-  background: var(--aier-amber-soft);
-  border: 1px dashed var(--aier-amber);
-  border-radius: 6px;
+  background: var(--aier-highlight);
+  border: 1px dashed var(--aier-accent);
+  border-radius: 4px;
   padding: 0.8rem 1rem;
   margin: 1.2rem 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.85rem;
-  color: var(--aier-amber);
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  color: var(--aier-accent-deep);
   line-height: 1.5;
 }
 .aier-flag::before {
   content: "AUTHOR NOTE — remove before publishing";
   display: block;
   font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0.3rem;
-  opacity: 0.8;
+  opacity: 0.85;
+}
+.aier-flag code {
+  font-family: var(--aier-ff-mono);
+  background: var(--aier-paper);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.92em;
 }
 
-/* ---- reflective activity block ---- */
+/* ---- activity block ---- */
 .aier-activity {
-  background: var(--aier-paper-raised);
-  border: 1px solid var(--aier-line);
-  border-radius: 8px;
+  background: var(--aier-paper);
+  border: 1px solid var(--aier-rule);
+  border-radius: 6px;
   padding: 1.4rem 1.5rem;
   margin: 2rem 0;
 }
 .aier-activity h3 {
+  font-family: var(--aier-ff-display);
+  font-weight: 450;
   margin: 0 0 0.3rem;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  color: var(--aier-ink);
 }
 .aier-activity .aier-activity-kind {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--aier-ff-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--aier-muted);
+  color: var(--aier-mute);
 }
 .aier-activity ol { padding-left: 1.2rem; }
 .aier-activity li { margin: 0.5rem 0; }
 .aier-activity .aier-tag {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--aier-ff-mono);
   font-size: 0.72rem;
   color: var(--aier-accent);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ---- figure ---- */
-.aier-figure {
-  margin: 2rem 0;
-  text-align: center;
-}
-.aier-figure img { max-width: 100%; height: auto; border-radius: 8px; }
+.aier-figure { margin: 2rem 0; text-align: center; }
+.aier-figure img { max-width: 100%; height: auto; border-radius: 6px; margin: 0 auto; }
 .aier-figure figcaption {
+  font-family: var(--aier-ff-body);
   font-size: 0.85rem;
-  color: var(--aier-muted);
+  color: var(--aier-mute);
   margin-top: 0.7rem;
   font-style: italic;
 }
 .aier-figure-placeholder {
-  border: 1px dashed var(--aier-line);
-  border-radius: 8px;
+  border: 1px dashed var(--aier-rule);
+  border-radius: 6px;
   padding: 2.5rem 1rem;
-  color: var(--aier-muted);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--aier-mute);
+  font-family: var(--aier-ff-mono);
   font-size: 0.9rem;
 }
 
@@ -258,170 +296,106 @@
 .aier-refs {
   margin-top: 2.5rem;
   padding-top: 1.2rem;
-  border-top: 1px solid var(--aier-line);
+  border-top: 1px solid var(--aier-rule);
   font-size: 0.92rem;
-  color: var(--aier-muted);
+  color: var(--aier-mute);
 }
 .aier-refs h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--aier-ink);
+  font-weight: 500;
 }
 
-/* ---- nav buttons ---- */
+/* ---- nav buttons (match site .btn) ---- */
 .aier-nav {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 3.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--aier-line);
+  border-top: 1px solid var(--aier-rule);
 }
 .aier-btn {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--aier-ff-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.95rem 1.4rem;
+  border: 1px solid var(--aier-ink);
+  background: var(--aier-ink);
+  color: var(--aier-paper);
   text-decoration: none;
-  padding: 0.7rem 1.3rem;
-  border-radius: 6px;
-  border: 1px solid var(--aier-accent);
-  color: var(--aier-accent);
-  background: transparent;
-  transition: all 0.15s ease;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
 }
-.aier-btn:hover { background: var(--aier-accent); color: #fff; }
-.aier-btn-primary { background: var(--aier-accent); color: #fff; }
-.aier-btn-primary:hover { background: #16463b; }
-.aier-btn-ghost { border-color: var(--aier-line); color: var(--aier-muted); }
-.aier-btn-ghost:hover { background: var(--aier-line); color: var(--aier-ink); }
+.aier-btn:hover { background: var(--aier-accent); border-color: var(--aier-accent); color: var(--aier-paper); transform: translateY(-1px); }
+.aier-btn-primary { background: var(--aier-accent); border-color: var(--aier-accent); color: var(--aier-paper); }
+.aier-btn-primary:hover { background: var(--aier-accent-deep); border-color: var(--aier-accent-deep); }
+.aier-btn-ghost { background: transparent; color: var(--aier-ink); }
+.aier-btn-ghost:hover { background: var(--aier-ink); color: var(--aier-paper); border-color: var(--aier-ink); }
 .aier-btn[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
 
 /* ---- landing-specific ---- */
-.aier-hero {
-  padding: 3rem 0 1rem;
-}
-.aier-hero .aier-h1 { font-size: 2.6rem; }
-.aier-hero-split {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
+.aier-hero { padding: 3rem 0 1rem; }
+.aier-hero .aier-h1 { font-size: clamp(2.2rem, 1.7rem + 2.2vw, 3.2rem); }
+
+.aier-hero-split { display: flex; align-items: center; gap: 2rem; }
 .aier-hero-text { flex: 1 1 0; min-width: 0; }
-.aier-hero-art {
-  flex: 0 0 28%;
-  max-width: 240px;
-}
-.aier-hero-art img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-@media (max-width: 440px) {
+.aier-hero-art { flex: 0 0 28%; max-width: 240px; }
+.aier-hero-art img { width: 100%; height: auto; display: block; }
+@media (max-width: 640px) {
   .aier-hero-split { flex-direction: column-reverse; gap: 1rem; }
   .aier-hero-art { flex-basis: auto; max-width: 200px; margin: 0 auto; }
 }
-/* ---- scroll cue (landing only) ---- */
+
+/* scroll cue */
 .aier-scrollcue {
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  text-decoration: none;
-  color: var(--aier-accent);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: var(--aier-paper-raised);
-  border: 1px solid var(--aier-line);
-  border-radius: 999px;
-  padding: 0.5rem 1rem 0.4rem;
-  box-shadow: 0 4px 14px rgba(20, 24, 29, 0.12);
+  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 50;
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  text-decoration: none; color: var(--aier-accent);
+  font-family: var(--aier-ff-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--aier-paper); border: 1px solid var(--aier-rule); border-radius: 999px;
+  padding: 0.5rem 1rem 0.4rem; box-shadow: 0 4px 14px rgba(24,32,46,0.12);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.aier-scrollcue:hover {
-  color: #fff;
-  background: var(--aier-accent);
-  border-color: var(--aier-accent);
-}
-.aier-scrollcue-arrow {
-  font-size: 1.15rem;
-  line-height: 1;
-  animation: aier-bob 1.8s ease-in-out infinite;
-}
-.aier-scrollcue.is-hidden {
-  opacity: 0;
-  transform: translateX(-50%) translateY(12px);
-  pointer-events: none;
-}
-@keyframes aier-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .aier-scrollcue-arrow { animation: none; }
-}
-.aier-audience {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.5rem 0 2.5rem;
-}
+.aier-scrollcue:hover { color: var(--aier-paper); background: var(--aier-accent); border-color: var(--aier-accent); }
+.aier-scrollcue-arrow { font-size: 1.15rem; line-height: 1; animation: aier-bob 1.8s ease-in-out infinite; }
+.aier-scrollcue.is-hidden { opacity: 0; transform: translateX(-50%) translateY(12px); pointer-events: none; }
+@keyframes aier-bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
+@media (prefers-reduced-motion: reduce) { .aier-scrollcue-arrow { animation: none; } }
+
+.aier-audience { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 2.5rem; }
 .aier-audience span {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.82rem;
-  background: var(--aier-accent-soft);
-  color: var(--aier-accent);
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
+  font-family: var(--aier-ff-mono); font-size: 0.78rem;
+  background: var(--aier-paper-2); color: var(--aier-ink-2);
+  padding: 0.4rem 0.8rem; border-radius: 999px; border: 1px solid var(--aier-rule);
 }
+
 .aier-toc { list-style: none; padding: 0; margin: 2rem 0; }
 .aier-toc li {
-  border: 1px solid var(--aier-line);
-  border-radius: 8px;
-  margin-bottom: 0.7rem;
-  background: var(--aier-paper-raised);
-  transition: border-color 0.15s ease;
+  border: 1px solid var(--aier-rule); border-radius: 6px; margin-bottom: 0.7rem;
+  background: var(--aier-paper); transition: border-color 0.18s ease;
 }
 .aier-toc li:hover { border-color: var(--aier-accent); }
-.aier-toc a {
-  display: block;
-  padding: 1rem 1.2rem;
-  text-decoration: none;
-  color: var(--aier-ink);
-}
-.aier-toc .aier-toc-num {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 0.75rem;
-  color: var(--aier-accent);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-.aier-toc .aier-toc-title { font-size: 1.1rem; display: block; margin-top: 0.15rem; }
-.aier-toc .aier-toc-desc { font-size: 0.9rem; color: var(--aier-muted); display: block; margin-top: 0.2rem; }
+.aier-toc a { display: block; padding: 1rem 1.2rem; text-decoration: none; color: var(--aier-ink); }
+.aier-toc .aier-toc-num { font-family: var(--aier-ff-mono); font-size: 0.74rem; color: var(--aier-accent); font-weight: 500; letter-spacing: 0.05em; }
+.aier-toc .aier-toc-title { font-family: var(--aier-ff-display); font-size: 1.15rem; display: block; margin-top: 0.15rem; }
+.aier-toc .aier-toc-desc { font-size: 0.9rem; color: var(--aier-mute); display: block; margin-top: 0.2rem; }
 
 .aier-attribution {
-  font-size: 0.88rem;
-  color: var(--aier-muted);
-  background: var(--aier-paper-raised);
-  border: 1px solid var(--aier-line);
-  border-radius: 8px;
-  padding: 1.1rem 1.3rem;
-  margin: 2rem 0;
-  line-height: 1.6;
+  font-size: 0.9rem; color: var(--aier-mute);
+  background: var(--aier-paper-2); border: 1px solid var(--aier-rule);
+  border-radius: 6px; padding: 1.1rem 1.3rem; margin: 2rem 0; line-height: 1.6;
 }
 
-/* ---- print: clean certificate-adjacent printing, hide author flags ---- */
 @media print {
-  .aier-flag, .aier-bar, .aier-nav, .aier-progress { display: none !important; }
-  .aier-body { background: #fff; }
+  .aier-flag, .aier-bar, .aier-nav, .aier-progress, .aier-scrollcue { display: none !important; }
+  .aier-body { background: var(--aier-paper); }
 }
 
 </style>
@@ -437,8 +411,7 @@
 
 <main class="aier-wrap">
 
-  <section class="aier-hero aier-hero-split">
-    <div class="aier-hero-text">
+  <section class="aier-hero">
     <p class="aier-eyebrow">Self-paced &middot; 8 modules &middot; approx. 15&ndash;20 min each</p>
     <h1 class="aier-h1">AI-Epistemic Resilience</h1>
     <p class="aier-lead">How to think clearly, verify well, and stay in control of your own judgment in a world where machines generate information at scale.</p>
@@ -453,10 +426,6 @@
       <span>Legal professionals</span>
       <span>Researchers</span>
       <span>Anyone responsible for AI use at work</span>
-    </div>
-  </div>
-    <div class="aier-hero-art">
-      <img src="assets/images/flatsolo.png" alt="AI-Epistemic Resilience shield emblem: a stylized brain and circuit flanked by linked human figures.">
     </div>
   </section>
 
