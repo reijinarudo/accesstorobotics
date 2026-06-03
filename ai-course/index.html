@@ -303,7 +303,25 @@
   padding: 3rem 0 1rem;
 }
 .aier-hero .aier-h1 { font-size: 2.6rem; }
-
+.aier-hero-split {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.aier-hero-text { flex: 1 1 0; min-width: 0; }
+.aier-hero-art {
+  flex: 0 0 38%;
+  max-width: 340px;
+}
+.aier-hero-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 640px) {
+  .aier-hero-split { flex-direction: column-reverse; gap: 1rem; }
+  .aier-hero-art { flex-basis: auto; max-width: 200px; margin: 0 auto; }
+}
 /* ---- scroll cue (landing only) ---- */
 .aier-scrollcue {
   position: fixed;
@@ -419,7 +437,8 @@
 
 <main class="aier-wrap">
 
-  <section class="aier-hero">
+  <section class="aier-hero aier-hero-split">
+    <div class="aier-hero-text">
     <p class="aier-eyebrow">Self-paced &middot; 8 modules &middot; approx. 15&ndash;20 min each</p>
     <h1 class="aier-h1">AI-Epistemic Resilience</h1>
     <p class="aier-lead">How to think clearly, verify well, and stay in control of your own judgment in a world where machines generate information at scale.</p>
@@ -434,6 +453,10 @@
       <span>Legal professionals</span>
       <span>Researchers</span>
       <span>Anyone responsible for AI use at work</span>
+    </div>
+  </div>
+    <div class="aier-hero-art">
+      <img src="assets/images/flatsolo.png" alt="AI-Epistemic Resilience shield emblem: a stylized brain and circuit flanked by linked human figures.">
     </div>
   </section>
 
