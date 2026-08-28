@@ -801,3 +801,14 @@ em { font-style: italic; }
   .cta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .cta-art { justify-content: flex-start; }
 }
+
+
+/* ---------- Announcement banner: wrap on small screens ---------- */
+/* The banner's two spans carry inline white-space:nowrap so they sit side by
+   side on wide screens. On phones that forces horizontal overflow and the text
+   gets clipped, so below the 720px breakpoint we let them wrap and tighten up. */
+@media (max-width: 720px) {
+  .banner { font-size: 0.7rem; letter-spacing: 0.04em; line-height: 1.5; }
+  .banner > span { white-space: normal !important; }
+  .banner[style] { column-gap: 1.25rem !important; row-gap: 0.3rem !important; }
+}
