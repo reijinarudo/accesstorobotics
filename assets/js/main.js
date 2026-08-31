@@ -1,3 +1,16 @@
+
+
+/* Scholarship launch switch. Shows the pre-launch copy until the cycle opens,
+   then swaps in the open-cycle copy. Elements are marked data-launch="pre" and
+   data-launch="post". Nothing to change by hand on launch day. */
+(function () {
+  var opensAt = new Date('2026-09-01T00:00:00-04:00');
+  if (new Date() < opensAt) return;
+  var pre = document.querySelectorAll('[data-launch="pre"]');
+  var post = document.querySelectorAll('[data-launch="post"]');
+  for (var i = 0; i < pre.length; i++) { pre[i].style.display = 'none'; }
+  for (var j = 0; j < post.length; j++) { post[j].style.display = ''; }
+})();
 /* Access to Robotics — minimal interactions */
 (function () {
   "use strict";
