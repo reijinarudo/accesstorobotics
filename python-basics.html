@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Basics — Finley Robotics Initiative</title>
+<meta name="description" content="A tested, step-by-step reference for scholars and mentors: connect to a Reachy Mini, run Python programs, make the robot move, and check AI-written code.">
+<meta name="theme-color" content="#F2EDE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.pb{--bg:#F2EDE4;--ink:#1d1b18;--muted:#5d574e;--accent:#b4532a;--code-bg:#1f1d1a;--code-ink:#efe9dd;--tip-bg:#fffaf1;--line:#d9d0c1;--chip:#e6dfd2}
+.pb *{box-sizing:border-box}
+
+.pb{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+.pb .wrap{max-width:1080px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px}
+.pb header.top{max-width:1080px;margin:0 auto;padding:40px 16px 8px}
+.pb .kicker{font:500 .8rem "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.pb h1,.pb h2,.pb h3{font-family:Fraunces,serif;font-weight:600;line-height:1.15}
+.pb h1{font-size:2.4rem;margin:.3rem 0 .6rem}
+.pb h2{font-size:1.6rem;margin:0 0 .7rem}
+.pb h3{font-size:1.2rem;margin:1.8rem 0 .4rem}
+.pb .lede{max-width:680px;color:var(--muted);margin:0 0 1rem}
+.pb nav.menu{position:sticky;top:24px;align-self:start;padding-top:24px}
+.pb nav.menu .kicker{display:block;margin-bottom:.8rem}
+.pb nav.menu ol{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;font:500 .85rem "JetBrains Mono",monospace}
+.pb nav.menu a{display:block;padding:.35rem .6rem;border-radius:6px;color:var(--ink);text-decoration:none;border-left:2px solid transparent}
+.pb nav.menu a:hover{background:var(--chip)}
+.pb nav.menu a.active{border-left-color:var(--accent);color:var(--accent);background:var(--chip)}
+.pb nav.menu .soon{color:var(--muted);font-weight:400}
+.pb main{padding:24px 0 100px;min-width:0}
+.pb section{padding:8px 0 40px;border-bottom:1px solid var(--line);margin-bottom:40px}
+.pb section:last-of-type{border-bottom:0}
+.pb .num{font:500 .8rem "JetBrains Mono",monospace;color:var(--accent);letter-spacing:.06em}
+.pb .note{border-left:3px solid var(--accent);padding:.4rem 0 .4rem 1rem;color:var(--muted);font-size:.95rem;margin:1rem 0}
+.pb .status{display:inline-block;font:500 .72rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--muted);vertical-align:middle;margin-left:.5rem}
+.pb ol.steps{padding-left:1.3rem}
+.pb ol.steps li{margin:.55rem 0}
+.pb ul.plan{padding-left:1.2rem;color:var(--muted)}
+.pb code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:var(--chip);padding:1px 5px;border-radius:4px}
+.pb pre{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:20px 22px;overflow-x:auto;font:15px/1.9 "JetBrains Mono",monospace;margin:1rem 0}
+.pb pre code{background:none;padding:0;font-size:1em}
+.pb pre{position:relative}
+.pb .copy{position:absolute;top:8px;right:8px;font:500 .72rem "JetBrains Mono",monospace;background:#3a352f;color:var(--code-ink);border:1px solid #5a534a;border-radius:6px;padding:3px 9px;cursor:pointer}
+.pb .copy:hover{background:#4a443c}
+.pb .t{border-bottom:1px dashed #c9a27f;cursor:help;outline:none;border-radius:3px}
+.pb .t:hover,.pb .t:focus,.pb .t.open{background:#3a352f;border-bottom-color:#f0b48a}
+.pb .tip{position:fixed;z-index:20;max-width:320px;background:var(--tip-bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:14.5px/1.5 "IBM Plex Sans",sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.18);display:none}
+.pb .tip b{display:block;font-family:"JetBrains Mono",monospace;font-weight:500;color:var(--accent);margin-bottom:2px}
+.pb .hint{font-size:.9rem;color:var(--muted)}
+.pb details{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem}
+.pb summary{cursor:pointer;font-weight:600}
+.pb ol.lines{padding-left:1.2rem}
+.pb ol.lines li{margin:.45rem 0}
+.pb ul.need,.pb ol.steps ul{padding-left:1.2rem}
+.pb ul.need li{margin:.5rem 0}
+.pb dl.glossary{display:grid;grid-template-columns:max-content 1fr;gap:.45rem 1.2rem;margin:1rem 0}
+.pb dl.glossary dt{font-weight:600}
+.pb dl.glossary dd{margin:0}
+@media (max-width:560px){.pb dl.glossary{grid-template-columns:1fr;gap:.1rem}
+.pb dl.glossary dd{margin-bottom:.6rem}}
+.pb .os-tabs{display:flex;gap:.4rem;margin:.6rem 0 .5rem}
+.pb .os-tab{font:500 .8rem "JetBrains Mono",monospace;padding:.3rem .8rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.pb .os-tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pb .os-panel{margin-bottom:.3rem}
+.pb table.keys{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.95rem}
+.pb table.keys th,.pb table.keys td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+.pb table.keys{table-layout:fixed}
+.pb table.keys td{overflow-wrap:anywhere}
+.pb table.keys th{font:500 .78rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.pb .top-link{font:500 .8rem "JetBrains Mono",monospace;color:var(--muted);text-decoration:none}
+.pb .top-link:hover{color:var(--accent)}
+@media (max-width:860px){.pb .wrap{grid-template-columns:1fr;gap:0}
+.pb nav.menu{position:sticky;top:0;z-index:15;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);min-width:0;max-width:100%}
+.pb .wrap{grid-template-columns:minmax(0,1fr)}
+.pb nav.menu .kicker{display:none}
+.pb nav.menu ol{display:flex;gap:.3rem;overflow-x:auto;white-space:nowrap;padding-bottom:4px}
+.pb nav.menu a{border-left:0;border-bottom:2px solid transparent;padding:.35rem .55rem}
+.pb nav.menu a.active{border-bottom-color:var(--accent)}
+.pb h1{font-size:1.9rem}}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+.pb{background:var(--bg);color:var(--ink);font:17px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+.pb nav.menu{top:96px}
+.pb h1,.pb h2,.pb h3{color:var(--ink)}
+.pb .lede{max-width:680px}
+.pb ol.steps,.pb ul.need{display:block}
+.pb ol.steps li,.pb ul.need li{min-width:0;max-width:100%}
+.pb pre{max-width:100%;box-sizing:border-box}
+@media (max-width:860px){.pb nav.menu{top:65px}}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><span>Finley Robotics</span><span class="brand-mark">A2R</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu"><span></span></button>
+    <ul id="primary-nav" class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mission.html">Mission</a></li>
+      <li><a href="scholarship.html">Scholarship</a></li>
+      <li><a href="talks.html">Talks</a></li>
+      <li><a href="reachy.html">Reachy Mini</a></li>
+      <li><a href="showcase.html">Showcase</a></li>
+      <li><a href="donors.html">Donors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main" class="pb">
+<header class="top">
+  <span class="kicker">Reference · Scholars and mentors</span>
+  <h1>Python Basics for the Reachy Mini</h1>
+  <p class="lede">A reference for scholars and mentors, written for people who have never used a Reachy Mini: how to connect to your robot, run a program, and read the code that makes it move. Hover over or tap any underlined piece of code to see what it does and why it is there.</p>
+</header>
+
+<div class="wrap">
+<nav class="menu" aria-label="On this page">
+  <span class="kicker">On this page</span>
+  <ol>
+    <li><a href="#start">00 Before you begin</a></li>
+    <li><a href="#session">01 Start a session</a></li>
+    <li><a href="#run">02 Run a program</a></li>
+    <li><a href="#first-move">03 Your first move</a></li>
+    <li><a href="#python">04 Python you need</a></li>
+    <li><a href="#moves">05 Making it move</a></li>
+    <li><a href="#recover">06 Check and recover</a></li>
+    <li><a href="#ai">07 Coding with AI</a></li>
+  </ol>
+</nav>
+
+<main>
+<p class="note">Every command and example on this page was run on Aiden, one of the Initiative's Reachy Mini robots, before it was published.</p>
+
+<section id="start">
+  <span class="num">00</span>
+  <h2>Before you begin</h2>
+  <p>This page assumes you have never used a Reachy Mini, a terminal, or Python. Start here even if some of it is familiar.</p>
+
+  <h3>What you need</h3>
+  <ul class="need">
+    <li><strong>Your Reachy Mini</strong>, already assembled and connected to your Wi-Fi. Pollen Robotics, the company that makes the robot, has a setup guide for this, and your mentor helps you with it in your first session.</li>
+    <li><strong>Your own computer</strong> (Windows or Mac) connected to the same Wi-Fi as the robot.</li>
+    <li><strong>Your robot's network name and password.</strong> You get these from the Reachy Mini app when you set up the robot, or from your mentor. Write them down and keep them somewhere safe.</li>
+  </ul>
+
+  <h3>Meet your robot</h3>
+  <p>The Reachy Mini has a head that can move up and down, tilt side to side, and turn left and right; two antennas on top of the head; and a body that can turn. Inside are a camera, microphones, a speaker, and a small computer that runs everything. Your programs run on that small computer.</p>
+
+  <h3>Words you will see on this page</h3>
+  <dl class="glossary">
+    <dt>Terminal</dt><dd>A window where you give a computer instructions by typing them. On Windows it is called PowerShell.</dd>
+    <dt>Command</dt><dd>One instruction you type into the terminal and send by pressing Enter.</dd>
+    <dt>Prompt</dt><dd>The text at the start of the line in the terminal, followed by a blinking cursor. It tells you which computer is listening and that it is ready for your next command.</dd>
+    <dt>Session</dt><dd>A live connection from your computer to the robot's computer. While it is open, the commands you type run on the robot.</dd>
+    <dt>SSH</dt><dd>The program that opens a session. It stands for Secure Shell.</dd>
+    <dt>Network name</dt><dd>The name your computer uses to find the robot on your Wi-Fi, such as <code>reachy-mini.local</code>.</dd>
+    <dt>Python</dt><dd>A programming language. The robot already has it installed, and its software is written in it.</dd>
+    <dt>Program (or script)</dt><dd>A file of Python instructions that the robot carries out from top to bottom.</dd>
+    <dt>File block</dt><dd>A block you paste into the terminal that creates a program file on the robot in one step. Section 02 explains it.</dd>
+    <dt>Package</dt><dd>Code someone else wrote that your program can borrow. Pollen's package for the robot is called <code>reachy_mini</code>.</dd>
+  </dl>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="session">
+  <span class="num">01</span>
+  <h2>Start a session with your robot</h2>
+  <p>A session connects your computer to the robot's computer so the commands you type run on the robot. You start one at the beginning of each work period, and everything else on this page happens inside it.</p>
+  <ol class="steps">
+    <li><strong>Turn the robot on</strong> and wait for it to finish starting up, about two to three minutes. Partway through, every Reachy Mini plays a cuckoo sound, which means it is starting up normally. It can be ready a few seconds after the cuckoo, or it can take up to a minute. To check, say hello to the robot. When it answers, you can connect.</li>
+    <li><strong>Check your Wi-Fi.</strong> Click the Wi-Fi symbol on your computer and make sure it is connected to the same network the robot was set up on.</li>
+    <li><strong>Open a terminal.</strong>
+      <div class="os-tabs" role="tablist" aria-label="Your computer">
+        <button type="button" role="tab" class="os-tab" data-os="win" aria-selected="true">Windows</button>
+        <button type="button" role="tab" class="os-tab" data-os="mac" aria-selected="false">Mac</button>
+      </div>
+      <div class="os-panel" data-os="win">Press the Windows key, type <code>PowerShell</code>, and press Enter. A window opens with a line of text and a blinking cursor. That line is the prompt, and on Windows it looks like <code>PS C:\Users\yourname&gt;</code>.</div>
+      <div class="os-panel" data-os="mac" hidden>Press Command and the space bar together, type <code>Terminal</code>, and press Enter. A window opens with a line of text and a blinking cursor. That line is the prompt, and on a Mac it ends with a <code>%</code> sign, something like <code>yourname@MacBook ~ %</code>. Everything else on this page is the same on a Mac. If anything on your Mac looks different from what this page describes, ask your mentor.</div>
+    </li>
+    <li><strong>Practice once before connecting.</strong> If you have never used a terminal, type <code>hostname</code> and press Enter. The terminal answers with your own computer's name and shows the prompt again. Every command works this way: type it, press Enter, and read the answer. The commands on this page are safe to run. If you are unsure about any other command, ask your mentor before you press Enter.</li>
+    <li><strong>Type the connection command</strong> exactly as shown below, using your robot's network name, and press Enter.</li>
+    <li><strong>The first time only,</strong> the terminal asks <code>Are you sure you want to continue connecting (yes/no)?</code> Type <code>yes</code> and press Enter. This tells your computer to trust the robot from now on.</li>
+    <li><strong>Type the robot's password</strong> and press Enter. The screen stays blank while you type a password, with no dots or stars. That is normal.</li>
+    <li><strong>Check that you are in.</strong> A few lines of welcome text appear, starting with <code>Linux reachy-mini</code>. Then the prompt changes to show the robot's account and name: <code>pollen@reachy-mini:~ $</code>. From now on, every command you type runs on the robot. To leave, type <code>exit</code> and press Enter.</li>
+  </ol>
+
+  <h3>The connection command</h3>
+<pre><code><span class="t" tabindex="0" data-k="ssh" data-tip="The program that opens a session with another computer. It is built into Windows PowerShell and Mac Terminal.">ssh</span> <span class="t" tabindex="0" data-k="pollen" data-tip="The name of the account on the robot that you log in as. On a Reachy Mini this account is called pollen, after Pollen Robotics, the company that makes the robot.">pollen</span><span class="t" tabindex="0" data-k="@" data-tip="Read it as 'at': log in as pollen at this robot.">@</span><span class="t" tabindex="0" data-k="reachy-mini" data-tip="Your robot's name. Use the name from your Reachy Mini app, or the new name if the robot was renamed.">reachy-mini</span><span class="t" tabindex="0" data-k=".local" data-tip="Tells your computer to look for this name on your own Wi-Fi network.">.local</span></code></pre>
+
+  <h3>What a robot's network name looks like</h3>
+  <p>Every device on your Wi-Fi has a name that other devices use to find it. A new robot's name looks like <code>reachy-mini.local</code>. If someone renames the robot, the first part changes but the ending stays the same, for example <code>rose.local</code>. The <code>.local</code> ending means "a device on this network," so the name only works when your computer and the robot share the same Wi-Fi.</p>
+
+  <h3>If it does not work</h3>
+  <table class="keys">
+    <tr><th>You see</th><th>What it means and what to do</th></tr>
+    <tr><td><code>Could not resolve hostname</code></td><td>Your computer cannot find a robot by that name. Check the spelling of the name, check that both devices are on the same Wi-Fi, and check that the robot has finished starting up.</td></tr>
+    <tr><td><code>Permission denied, please try again</code></td><td>The password was wrong. Type it again. Remember that nothing shows while you type.</td></tr>
+    <tr><td>Nothing happens for a long time, then <code>Connection timed out</code></td><td>Your computer found the name but cannot reach the robot. Turn the robot off and on, wait three minutes, and try again.</td></tr>
+  </table>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="run">
+  <span class="num">02</span>
+  <h2>Run a program</h2>
+  <p>With your session open, you write the program in a file on the robot and tell Python to run it.</p>
+  <ol class="steps">
+    <li><strong>Pause the conversation app</strong> so your program can move the head without competing with it. The robot goes quiet and stops listening until you restart it in the last step.
+<pre><code><span class="t" tabindex="0" data-k="curl" data-tip="A program that sends a request to a web address. Here it sends the request to the robot's own control software.">curl</span> <span class="t" tabindex="0" data-k="-s" data-tip="Silent: hides the progress display so you only see the answer.">-s</span> <span class="t" tabindex="0" data-k="-X POST" data-tip="POST sends an instruction to the robot. Without it, curl only asks for information.">-X POST</span> <span class="t" tabindex="0" data-k="http://localhost:8000/api/apps/stop-current-app" data-tip="The address of the robot's control software. localhost means 'this same computer', the robot itself, and stop-current-app is the instruction to pause whatever app is running.">http://localhost:8000/api/apps/stop-current-app</span></code></pre></li>
+    <li><strong>Create the program file.</strong> Each example on this page comes as one block. Click its <strong>Copy</strong> button, click inside the terminal, paste with <code>Ctrl</code> + <code>V</code>, and press Enter. That one paste creates the file on the robot with the program inside it. "How the file block works" below explains each line.</li>
+    <li><strong>Check the file</strong> before you run it. Type <code>cat head_tilt.py</code> and press Enter. <code>cat</code> prints the file to the screen, so you can see whether everything saved.</li>
+    <li><strong>Run the program</strong> and watch the robot. Type the command below and press Enter.
+<pre><code><span class="t" tabindex="0" data-k="/venvs/apps_venv/bin/python" data-tip="The copy of Python that has Pollen's robot code installed. The robot has more than one copy of Python, and the plain python3 command uses one that cannot find the robot code.">/venvs/apps_venv/bin/python</span> <span class="t" tabindex="0" data-k="head_tilt.py" data-tip="The program file you just created.">head_tilt.py</span></code></pre>
+If you see <code>ModuleNotFoundError: No module named 'reachy_mini'</code>, you started the program with <code>python3</code>. Run it again with the full path above.</li>
+    <li><strong>Start the conversation app again</strong> when you are finished, so the robot talks and listens as usual. It comes back within a few seconds.
+<pre><code><span class="t" tabindex="0" data-k="curl -s -X POST" data-tip="The same request program as the pause step: send an instruction to the robot's control software.">curl -s -X POST</span> <span class="t" tabindex="0" data-k="…/start-app/reachy_mini_conversation_app" data-tip="start-app is the instruction to start an app, and reachy_mini_conversation_app is the exact name of the app that lets the robot talk and listen. Pollen Robotics wrote it, and it comes with every Reachy Mini.">http://localhost:8000/api/apps/start-app/reachy_mini_conversation_app</span></code></pre>
+If it worked, the robot answers with a line of text that includes <code>"state":"starting"</code> and <code>"error":null</code>. The prompt appears at the end of that same line, which is normal. Wait a few seconds, and the robot is ready to talk.</li>
+    <li><strong>End the session</strong> by typing <code>exit</code>.</li>
+  </ol>
+  <h3>If a command does not work</h3>
+  <table class="keys">
+    <tr><th>You see</th><th>What it means and what to do</th></tr>
+    <tr><td><code>No such file or directory</code> after typing an address that starts with <code>http</code></td><td>The first word of the command is missing. The terminal reads the first word as the program to run, so an address on its own looks like a file it cannot find. Put <code>curl -s -X POST</code> in front of the address and press Enter again. Copying the whole command from this page avoids the slip.</td></tr>
+    <tr><td><code>Sudo is disabled on this machine</code>, or any message about Windows or your own computer</td><td>The command ran on your own computer. This happens after a reboot or after typing <code>exit</code>, because the session has closed. Look at the prompt: <code>pollen@reachy-mini:~ $</code> means you are on the robot, and <code>PS C:\Users\...&gt;</code> means you are on your Windows computer. Connect again with SSH, then run the command.</td></tr>
+    <tr><td><code>ModuleNotFoundError: No module named 'reachy_mini'</code></td><td>You ran the program with <code>python3</code>. Use the full path shown in the Run step.</td></tr>
+  </table>
+
+  <h3>How the file block works</h3>
+  <p>Every example starts with a line that names the file and ends with a line that says <code>EOF</code>. Everything between those two lines goes into the file. This kind of block is called a here-document.</p>
+<pre><code><span class="t" tabindex="0" data-k="cat > head_tilt.py << 'EOF'" data-tip="Create a file named head_tilt.py and put everything that follows into it, up to the line that says EOF. If a file with that name already exists, this replaces it.">cat &gt; head_tilt.py &lt;&lt; 'EOF'</span>
+<span class="t" tabindex="0" data-k="the program" data-tip="The Python program itself. These lines go into the file exactly as written, spaces included.">from reachy_mini import ReachyMini
+...the rest of the program...</span>
+<span class="t" tabindex="0" data-k="EOF" data-tip="Short for 'end of file'. This line tells the terminal the file is finished. It must be on its own line with nothing else on it.">EOF</span></code></pre>
+  <ul class="need">
+    <li><strong>To change a program,</strong> edit the code in the block and paste the whole block again. The new file replaces the old one.</li>
+    <li><strong>Python reads the spaces at the start of each line</strong> to tell which lines belong together. The <strong>Copy</strong> buttons on this page copy those spaces exactly. If you copy code from somewhere else and see <code>IndentationError: unexpected indent</code>, extra spaces came along. Copy the block again from this page and paste it.</li>
+    <li><strong>Check the file</strong> after you paste it with <code>cat</code> and the file name, such as <code>cat head_tilt.py</code>.</li>
+  </ul>
+  <p class="hint">Tested on Aiden, October 28, 2026: every program on this page was created this way.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="first-move">
+  <span class="num">03</span>
+  <h2>Your first move: look up and tilt the head <span class="status">tested on Aiden</span></h2>
+  <p>This program lifts the robot's head slightly and tilts it to one side over one second. It is the shortest complete program that makes a Reachy Mini move. It comes from Pollen Robotics' own documentation.</p>
+  <p class="hint">Hover over any underlined piece of code to see what it does. On a phone or tablet, tap it.</p>
+
+<pre><code>cat &gt; head_tilt.py &lt;&lt; 'EOF'
+<span class="t" tabindex="0" data-k="from … import" data-tip="Brings one specific piece of a package into your program, so you can use it by name. Python only loads what you ask for.">from</span> <span class="t" tabindex="0" data-k="reachy_mini" data-tip="The code Pollen Robotics wrote to control the robot. It is already on your robot.">reachy_mini</span> import <span class="t" tabindex="0" data-k="ReachyMini" data-tip="The piece of Pollen code that stands for your robot. Everything you tell the robot to do goes through it.">ReachyMini</span>
+from <span class="t" tabindex="0" data-k="reachy_mini.utils" data-tip="A folder of helper tools inside Pollen's code. The dot means 'utils, which lives inside reachy_mini'.">reachy_mini.utils</span> import <span class="t" tabindex="0" data-k="create_head_pose" data-tip="A helper that turns plain numbers (how far up, how much tilt) into the head position format the robot needs. Without it you would have to build that format by hand.">create_head_pose</span>
+
+<span class="t" tabindex="0" data-k="with … as mini:" data-tip="Opens a connection to the robot and names it mini. When the indented block ends, Python closes the connection for you, even if something goes wrong partway through.">with ReachyMini() as mini:</span>
+    <span class="t" tabindex="0" data-k="# comment" data-tip="Any line starting with # is a note for people. Python skips it. Use comments to say why the code does what it does."># Look up and tilt head</span>
+    <span class="t" tabindex="0" data-k="mini.goto_target(" data-tip="Tells the robot to move smoothly to a target position. The dot means 'goto_target, which belongs to mini'.">mini.goto_target(</span>
+        <span class="t" tabindex="0" data-k="head=" data-tip="Says which part of the robot the target is for: the head.">head=</span>create_head_pose(<span class="t" tabindex="0" data-k="z=10" data-tip="Raise the head 10 units straight up. Because mm=True, the unit is millimeters.">z=10</span>, <span class="t" tabindex="0" data-k="roll=15" data-tip="Tilt the head 15 units to the side, like tilting your ear toward your shoulder. Because degrees=True, the unit is degrees.">roll=15</span>, <span class="t" tabindex="0" data-k="degrees=True" data-tip="Tells the helper that angles are in degrees. Robots often use radians by default, so this setting prevents a much larger move than you meant.">degrees=True</span>, <span class="t" tabindex="0" data-k="mm=True" data-tip="Tells the helper that distances are in millimeters.">mm=True</span>),
+        <span class="t" tabindex="0" data-k="duration=1.0" data-tip="Take 1.0 second to get there. A larger number gives a slower, gentler move.">duration=1.0</span>
+    )
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python head_tilt.py</code></pre>
+
+  <details>
+    <summary>Line-by-line notes (for printing and screen readers)</summary>
+    <ol class="lines" id="lines"></ol>
+  </details>
+
+  <h3>What you should see</h3>
+  <figure style="margin:1rem 0"><img src="data:image/jpeg;base64,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" alt="Aiden, a Reachy Mini, with his head raised and tilted to one side after running the program" style="width:100%;max-width:520px;border-radius:10px;display:block"><figcaption class="hint">Aiden after running head_tilt.py: head raised and tilted to one side.</figcaption></figure>
+  <h3>Try it</h3>
+  <p>Change <code>roll=15</code> to <code>roll=-15</code> and run it again. Predict which way the head will tilt before you run it.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="python">
+  <span class="num">04</span>
+  <h2>Python you need <span class="status">tested on Aiden</span></h2>
+  <p>Four ideas show up in almost every robot program: variables, loops, functions, and imports. Each one is shown here with the robot. Run each example the same way you ran your first move: copy the block, paste it into the terminal, and run the program with the command under it.</p>
+
+  <h3>Variables: give a number a name</h3>
+  <p>A variable is a name that holds a value. Here the tilt amount gets the name <code>tilt</code>, so you can change it in one place.</p>
+<pre><code>cat &gt; tilt_variable.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+
+<span class="t" tabindex="0" data-k="tilt = 20" data-tip="Creates a variable named tilt and stores the number 20 in it. The = sign means 'store this value under this name'.">tilt = 20</span>
+
+with ReachyMini() as mini:
+    mini.goto_target(head=create_head_pose(<span class="t" tabindex="0" data-k="roll=tilt" data-tip="Uses whatever number is stored in tilt. Change the 20 above to 10 and the robot tilts less, without touching this line.">roll=tilt</span>, degrees=True), duration=1.0)
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python tilt_variable.py</code></pre>
+  <p><strong>Try it:</strong> change <code>tilt = 20</code> to <code>tilt = 5</code>. Predict the difference before you run it.</p>
+
+  <h3>Loops: repeat a move</h3>
+  <p>A loop runs the same lines more than once. This program levels the head, then nods three times. Change the 3 to nod as many times as you like.</p>
+<pre><code>cat &gt; nod_loop.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+
+with ReachyMini() as mini:
+    <span class="t" tabindex="0" data-k="# Start from a level head" data-tip="A comment explaining the next line. Comments are for people; Python skips them."># Start from a level head, facing straight ahead</span>
+    <span class="t" tabindex="0" data-k="create_head_pose()" data-tip="With no numbers inside the parentheses, every value is zero: head level and facing straight ahead. Starting here means the nods look the same no matter where the last program left the head.">mini.goto_target(head=create_head_pose(), duration=1.0)</span>
+
+    # Nod three times
+    <span class="t" tabindex="0" data-k="for i in range(3):" data-tip="Repeat the indented lines below three times. range(3) counts 0, 1, 2, and i holds the current count. The colon at the end and the indent on the next lines show Python which lines belong to the loop.">for i in range(3):</span>
+        mini.goto_target(head=create_head_pose(<span class="t" tabindex="0" data-k="pitch=15" data-tip="Pitch nods the head, like saying yes. 15 degrees is a small, comfortable nod.">pitch=15</span>, degrees=True), duration=0.5)
+        mini.goto_target(head=create_head_pose(<span class="t" tabindex="0" data-k="pitch=0" data-tip="Back to level. Each nod is two moves: down, then back.">pitch=0</span>, degrees=True), duration=0.5)
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python nod_loop.py</code></pre>
+  <p class="hint"><strong>Start from a known position.</strong> The robot begins each program wherever the last one left its head. Without the first move, a nod that starts from a tilted head comes out at an angle, which looks like a bug. Begin every movement program by leveling the head.</p>
+  <p class="hint">Tested on Aiden, October 28, 2026: three separate nods, each one finishing before the next began.</p>
+
+  <h3>Functions: give a move a name</h3>
+  <p>A function packages several lines under one name, so you can use them again with one line.</p>
+<pre><code>cat &gt; nod_function.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+
+<span class="t" tabindex="0" data-k="def nod(mini, times):" data-tip="def starts a new function named nod. Inside the parentheses are the things it needs to be given each time: the robot (mini) and how many nods (times).">def nod(mini, times):</span>
+    for i in range(times):
+        mini.goto_target(head=create_head_pose(pitch=15, degrees=True), duration=0.5)
+        mini.goto_target(head=create_head_pose(pitch=0, degrees=True), duration=0.5)
+
+with ReachyMini() as mini:
+    mini.goto_target(head=create_head_pose(), duration=1.0)
+    <span class="t" tabindex="0" data-k="nod(mini, 2)" data-tip="Runs the nod function with this robot, two times. Writing nod(mini, 5) would nod five times.">nod(mini, 2)</span>
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python nod_function.py</code></pre>
+  <p class="hint">Tested on Aiden, October 28, 2026: leveled the head, then nodded twice.</p>
+
+  <h3>Imports: borrow code someone else wrote</h3>
+  <p>An import brings in code from a package so you can use it. You have already used two from Pollen's <code>reachy_mini</code> package. Here is a third, NumPy, a package for working with numbers that the antenna examples in section 05 use.</p>
+<pre><code>cat &gt; numpy_check.py &lt;&lt; 'EOF'
+<span class="t" tabindex="0" data-k="import numpy as np" data-tip="Brings in NumPy, a widely used math package, under the short nickname np. The robot's antennas expect angles in radians, and NumPy converts degrees to radians for you.">import numpy as np</span>
+<span class="t" tabindex="0" data-k="np.deg2rad(45)" data-tip="Converts 45 degrees into radians (about 0.79). The dot means 'deg2rad, which belongs to NumPy'.">print(np.deg2rad(45))</span>
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python numpy_check.py</code></pre>
+  <p class="hint">This one prints a number and does not move the robot, so it is a safe way to check that NumPy is available. You should see <code>0.7853981633974483</code>, which is 45 degrees written in radians.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="moves">
+  <span class="num">05</span>
+  <h2>Making it move <span class="status">tested on Aiden</span></h2>
+  <p>Every move uses <code>goto_target</code>, which slides the robot smoothly from where it is to where you tell it. It can move three things: the head, the antennas, and the body.</p>
+
+  <h3>The head: four numbers to start with</h3>
+  <p><code>create_head_pose</code> takes these four numbers. One raises the head and three turn it. You can leave out any number you are not using, and it stays at zero.</p>
+  <table class="keys">
+    <tr><th>Name</th><th>What it does</th><th>Unit</th></tr>
+    <tr><td><code>z</code></td><td>Raises or lowers the head</td><td>millimeters, with <code>mm=True</code></td></tr>
+    <tr><td><code>roll</code></td><td>Tilts the head toward a shoulder</td><td>degrees, with <code>degrees=True</code></td></tr>
+    <tr><td><code>pitch</code></td><td>Nods the head forward or back</td><td>degrees, with <code>degrees=True</code></td></tr>
+    <tr><td><code>yaw</code></td><td>Turns the head left or right, like shaking "no." A positive number turns it toward the robot's own left.</td><td>degrees, with <code>degrees=True</code></td></tr>
+  </table>
+  <p class="hint">The head can also slide forward and back (<code>x</code>) and side to side (<code>y</code>), but on a Reachy Mini those slides are small and hard to see, so this page leaves them out.</p>
+
+  <h3>The robot's limits</h3>
+  <p>Pollen Robotics built limits into the robot so it cannot bump into itself. If you ask for more than a limit allows, the robot moves as far as it safely can and stops there.</p>
+  <table class="keys">
+    <tr><th>Movement</th><th>Range</th></tr>
+    <tr><td>Head tilt (roll) and nod (pitch)</td><td>-40° to +40°</td></tr>
+    <tr><td>Head turn (yaw)</td><td>-180° to +180°</td></tr>
+    <tr><td>Body turn</td><td>-160° to +160°</td></tr>
+    <tr><td>Head turn compared with body turn</td><td>No more than 65° apart</td></tr>
+  </table>
+
+  <h3>Antennas and body together</h3>
+  <p>This example is based on one in Pollen Robotics' documentation, with a level start and a return to center added. In one two-second move, the head rises slightly, the body turns 30 degrees toward the robot's own left, and both antennas lean toward the robot's own left. Then everything comes back to center.</p>
+<pre><code>cat &gt; full_move.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+import numpy as np
+
+with ReachyMini() as mini:
+    <span class="t" tabindex="0" data-k="start level" data-tip="Head level and straight ahead, both antennas at zero, body facing forward. Every movement program starts from here.">mini.goto_target(head=create_head_pose(), antennas=np.deg2rad([0, 0]), body_yaw=0, duration=1.0)</span>
+
+    mini.goto_target(
+        <span class="t" tabindex="0" data-k="head=create_head_pose(z=10, mm=True)" data-tip="Raises the head 10 millimeters.">head=create_head_pose(z=10, mm=True)</span>,
+        <span class="t" tabindex="0" data-k="antennas=np.deg2rad([45, 45])" data-tip="A list of two angles, one for each antenna. Both are 45, so both antennas lean the same way, toward the robot's own left. The antennas expect radians, so np.deg2rad converts each angle from degrees.">antennas=np.deg2rad([45, 45])</span>,
+        <span class="t" tabindex="0" data-k="body_yaw=np.deg2rad(30)" data-tip="Turns the whole body 30 degrees. A positive number turns it toward the robot's own left; a negative number turns it toward its right.">body_yaw=np.deg2rad(30)</span>,
+        duration=2.0,
+        <span class="t" tabindex="0" data-k='method="minjerk"' data-tip="How the move speeds up and slows down. minjerk starts and stops gently and is the default. The others are linear, ease_in_out, and cartoon.">method="minjerk"</span>
+    )
+
+    <span class="t" tabindex="0" data-k="return to center" data-tip="Back to the starting position over two seconds, so the next program starts from a known place.">mini.goto_target(head=create_head_pose(), antennas=np.deg2rad([0, 0]), body_yaw=0, duration=2.0)</span>
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python full_move.py</code></pre>
+  <p class="hint"><strong>What you may notice:</strong> while the body turns to its left, the head shifts slightly to the robot's right, so from the front it can look like the robot is turning to face you. Watch the move once from the front and once from the side.</p>
+  <p class="hint">Tested on Aiden, October 28, 2026.</p>
+
+  <h3>Antennas: lean together or spread apart</h3>
+  <p>At rest, both antennas stand straight up and parallel. The two numbers in the list control them separately. When both numbers have the same sign, the antennas lean the same way. When the signs differ, they move in opposite directions: <code>[-45, 45]</code> spreads them into a wide V, and <code>[45, -45]</code> crosses them into an X.</p>
+<pre><code>cat &gt; antennas_spread.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+import numpy as np
+<span class="t" tabindex="0" data-k="import time" data-tip="Brings in Python's time tools, so the program can pause.">import time</span>
+
+with ReachyMini() as mini:
+    mini.goto_target(head=create_head_pose(), antennas=np.deg2rad([0, 0]), body_yaw=0, duration=1.0)
+
+    mini.goto_target(head=create_head_pose(), antennas=np.deg2rad(<span class="t" tabindex="0" data-k="[-45, 45]" data-tip="Opposite signs move the antennas in opposite directions. This pair spreads them into a V. Swap the signs to [45, -45] and they cross into an X.">[-45, 45]</span>), duration=2.0)
+    <span class="t" tabindex="0" data-k="time.sleep(2)" data-tip="Pauses for two seconds so you can see the V before the antennas return.">time.sleep(2)</span>
+    mini.goto_target(head=create_head_pose(), antennas=np.deg2rad([0, 0]), duration=2.0)
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python antennas_spread.py</code></pre>
+  <p class="hint"><strong>Give every move the head position.</strong> A move that sets only the antennas can leave the head slightly off center. Including <code>head=create_head_pose()</code> in each move keeps the head where you expect it.</p>
+  <p class="hint">Tested on Aiden, October 28, 2026: the antennas spread into a wide V, held, and returned upright.</p>
+
+  <h3>Reset everything</h3>
+  <p>Paste this block once to create <code>reset_all.py</code>, then run it whenever the robot ends up in an odd position. It levels the head, stands the antennas up, and turns the body to face forward.</p>
+<pre><code>cat &gt; reset_all.py &lt;&lt; 'EOF'
+from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+import numpy as np
+
+with ReachyMini() as mini:
+    mini.goto_target(head=create_head_pose(), antennas=np.deg2rad([0, 0]), body_yaw=0, duration=2.0)
+EOF</code></pre>
+  <p class="hint">Then run it:</p>
+<pre><code>/venvs/apps_venv/bin/python reset_all.py</code></pre>
+  <p class="hint">Tested on Aiden, October 28, 2026.</p>
+  <p class="hint">Watch the units: the head uses <code>degrees=True</code> and <code>mm=True</code>, while antennas and body need radians from <code>np.deg2rad</code>. Mixing them up is a common reason a move comes out far smaller or larger than expected.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="recover">
+  <span class="num">06</span>
+  <h2>Check and recover</h2>
+  <p>When something goes wrong, start with the first fix and move down the list when a fix does not help.</p>
+
+  <h3>Stop a program that is still running</h3>
+  <p>Click inside the terminal window, then press <code>Ctrl</code> + <code>C</code>. The program stops right away, even in the middle of a move, and the head stays wherever it stopped. Run <code>reset_all.py</code> from section 05 to bring it back to center.</p>
+  <p class="hint">Tested on Aiden, October 28, 2026: stopped partway through a nod, with the head held halfway down.</p>
+
+  <h3>See what the robot is running</h3>
+<pre><code>curl -s http://localhost:8000/api/apps/current-app-status | python3 -m json.tool</code></pre>
+  <p class="hint">Shows the app that is running, in a readable layout. If no app is running, it prints <code>null</code>. Tested on Aiden, October 28, 2026.</p>
+
+  <h3>The recovery ladder</h3>
+  <ol class="steps">
+    <li><strong>Start the conversation app.</strong> Use this when the robot is awake and silent.
+<pre><code>curl -s -X POST http://localhost:8000/api/apps/start-app/reachy_mini_conversation_app</code></pre></li>
+    <li><strong>Restart the robot's main software.</strong> Use this when the motors or sound act strangely. Afterward, run step 1 to bring the conversation app back.
+<pre><code>sudo systemctl restart reachy-mini-daemon</code></pre></li>
+    <li><strong>Restart the whole robot.</strong> Your session closes, which is expected: the terminal shows <code>client_loop: send disconnect: Connection reset</code> and returns to your computer's prompt. The robot plays a short sleepy sound and lowers its head, then about 20 seconds later lifts its head and plays the cuckoo. It can take another minute before it is ready to talk. Say hello; when it answers, it is ready. If it has not answered after two minutes, connect again and run step 1.
+<pre><code>sudo reboot</code></pre>
+<span class="hint">Tested on Aiden, October 28, 2026.</span></li>
+  </ol>
+
+  <h3>Before you touch or move the robot by hand</h3>
+  <p>Let the motors go limp first, so the head moves freely in your hand. Support the head with your hand, because it drops as the motors let go.</p>
+<pre><code>curl -s -X POST http://localhost:8000/api/motors/set_mode/disabled</code></pre>
+  <p><strong>Before you make the motors hold again, take your hands away and let the head rest on its own.</strong> When the motors switch back on, the head snaps back up to where it was in less than a second. That is fast enough to startle you or pinch a finger.</p>
+<pre><code>curl -s -X POST http://localhost:8000/api/motors/set_mode/enabled</code></pre>
+  <p class="hint">Tested on Aiden, October 28, 2026: the head went limp, then snapped back upright in under a second when the motors switched on.</p>
+
+  <h3>Turn the robot off safely</h3>
+  <p>Check the prompt first. This command must run on the robot, so the prompt should read <code>pollen@reachy-mini:~ $</code>.</p>
+<pre><code>sudo shutdown -h now</code></pre>
+  <p class="hint">The session closes with <code>Connection reset</code>. The robot plays its sleepy sound, lowers its head into its body, and folds its antennas back. When it stops moving, it is safe to use the power switch. Tested on Aiden, October 28, 2026.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+
+<section id="ai">
+  <span class="num">07</span>
+  <h2>Coding with an AI assistant</h2>
+  <p>An AI assistant such as Claude can write robot code for you in seconds. It can also be wrong in ways that look right. Your job is to direct it and check its work. This is the same habit the AI-Epistemic Resilience course teaches, applied to code.</p>
+
+  <h3>Write the program by hand first</h3>
+  <p>Do sections 03 to 05 yourself before you ask an assistant for anything. You need to be able to read code to check it.</p>
+
+  <h3>Ask with details</h3>
+  <p>Tell the assistant what robot you have, what package to use, and what you want to happen. For example:</p>
+<pre><code>I have a Reachy Mini robot. Using Pollen Robotics' reachy_mini Python
+package, write a short program that makes the robot look left, then
+right, then back to center, one second per move. Use goto_target and
+create_head_pose with degrees=True. Keep every angle within the
+robot's limits: head turn (yaw) up to 180 degrees, and tilt and nod
+up to 40 degrees. Explain each line in plain words.</code></pre>
+
+  <h3>Check before you run</h3>
+  <ol class="steps">
+    <li><strong>Read every line.</strong> If you cannot say what a line does, ask the assistant to explain it, or ask your mentor.</li>
+    <li><strong>Check the numbers.</strong> Are the angles inside the limits in section 05? Are the units right, degrees for the head and <code>np.deg2rad</code> for antennas and body? Is each <code>duration</code> long enough to be gentle, about half a second or more?</li>
+    <li><strong>Check that it only uses what you asked for.</strong> If it imports packages you have not seen or does things you did not ask for, ask why before you run it.</li>
+    <li><strong>Predict what the robot will do.</strong> Say it out loud or write it down.</li>
+    <li><strong>Run it and compare.</strong> Did the robot do what you predicted?</li>
+  </ol>
+
+  <h3>When it does not work</h3>
+  <p>Copy the exact error message from the terminal and paste it back to the assistant along with your code. Then read its fix the same way you read the first version. If the same error comes back twice, stop and ask your mentor.</p>
+  <a class="top-link" href="#">Back to top ↑</a>
+</section>
+</main>
+</div>
+
+</main>
+
+<div class="pb"><div class="tip" id="tip" role="tooltip"></div></div>
+<script>
+const tip=document.getElementById('tip');
+const terms=[...document.querySelectorAll('.t')];
+function show(el){
+  terms.forEach(t=>t!==el&&t.classList.remove('open'));
+  tip.innerHTML='<b></b><span></span>';
+  tip.querySelector('b').textContent=el.dataset.k;
+  tip.querySelector('span').textContent=el.dataset.tip;
+  tip.style.display='block';
+  const r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;
+  let x=Math.min(Math.max(8,r.left),window.innerWidth-w-8);
+  let y=r.bottom+8; if(y+h>window.innerHeight-8) y=r.top-h-8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hide(){tip.style.display='none';terms.forEach(t=>t.classList.remove('open'));}
+terms.forEach(el=>{
+  el.addEventListener('mouseenter',()=>show(el));
+  el.addEventListener('mouseleave',()=>{if(!el.classList.contains('open'))hide();});
+  el.addEventListener('focus',()=>show(el));
+  el.addEventListener('blur',hide);
+  el.addEventListener('click',e=>{e.stopPropagation();if(el.classList.contains('open')){hide();}else{show(el);el.classList.add('open');}});
+});
+document.addEventListener('click',hide);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+window.addEventListener('scroll',hide,{passive:true});
+const ol=document.getElementById('lines');
+document.querySelectorAll('#first-move .t').forEach(el=>{const li=document.createElement('li');const c=document.createElement('code');c.textContent=el.dataset.k;li.append(c,' : '+el.dataset.tip);ol.append(li);});
+// copy buttons: copy exactly the code, with no extra spaces at the start or end of lines
+document.querySelectorAll('pre').forEach(pre=>{const btn=document.createElement('button');btn.className='copy';btn.type='button';btn.textContent='Copy';btn.addEventListener('click',async e=>{e.stopPropagation();const code=pre.querySelector('code').textContent.replace(/\u00a0/g,' ').split('\n').map(l=>l.replace(/\s+$/,'')).join('\n').replace(/^\n+|\n+$/g,'');try{await navigator.clipboard.writeText(code);btn.textContent='Copied';}catch(_){btn.textContent='Select and copy';}setTimeout(()=>btn.textContent='Copy',1500);});pre.appendChild(btn);});
+// Windows / Mac tabs: remember the choice for this visit
+document.querySelectorAll('.os-tab').forEach(b=>b.addEventListener('click',()=>{const os=b.dataset.os;document.querySelectorAll('.os-tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.os===os));document.querySelectorAll('.os-panel').forEach(pn=>pn.hidden=pn.dataset.os!==os);}));
+// highlight the menu item for the section in view
+const links=[...document.querySelectorAll('nav.menu a')];
+const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));const act=links.find(a=>a.classList.contains('active'));if(act&&window.innerWidth<=860){const list=act.closest('ol');list.scrollLeft=act.parentElement.offsetLeft-list.offsetLeft-(list.clientWidth-act.offsetWidth)/2;}}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Finley Robotics Initiative</h4>
+        <p>A program dedicated to expanding access to robotics and artificial intelligence for underserved high school students.</p>
+      </div>
+      <div class="footer-col"><h5>The Program</h5> <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="scholarship.html">Scholarship</a></li>
+          <li><a href="reachy.html">Reachy Mini</a></li>
+          <li><a href="talks.html">Talks</a></li>
+          <li><a href="ai-course/index.html">AI-ER Course</a></li>
+        </ul></div>
+      <div class="footer-col"><h5>Get Involved</h5><ul>
+        <li><a href="scholarship.html">Apply</a></li>
+        <li><a href="donors.html">Donate</a></li>
+        <li><a href="contact.html">Partner with us</a></li>
+        <li><a href="showcase.html">Showcase</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-base">
+      <span>© <span data-year>2026</span> Finley Robotics Initiative. All rights reserved.</span>
+      <span>Atlanta, GA · accesstorobotics.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
