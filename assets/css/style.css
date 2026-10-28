@@ -663,7 +663,7 @@ em { font-style: italic; }
   gap: 2.5rem;
 }
 @media (min-width: 720px) {
-  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+   .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; }
 }
 .footer-brand h4 {
   font-family: var(--ff-display);
